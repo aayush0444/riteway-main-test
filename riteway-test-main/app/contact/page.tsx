@@ -17,7 +17,7 @@ import {
 const WA_HREF =
   "https://wa.me/919877541199?text=Hello%2C+I+am+interested+in+Rite-Way+products.+Please+advise.";
 
-const WEB3FORMS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY"; // ← replace with your key from web3forms.com
+const WEB3FORMS_KEY = "REPLACE_WITH_WEB3FORMS_KEY"; // ← GET YOUR FREE KEY AT: web3forms.com
 
 const PRODUCTS = [
   "Concrete Platform Weighbridge",
@@ -178,8 +178,7 @@ function ContactForm() {
         </div>
         <h3 className="text-[#111827] font-bold text-xl mb-2">Message Sent</h3>
         <p className="text-gray-500 text-sm leading-relaxed max-w-xs">
-          Thank you — we&apos;ll get back to you within a few hours. You can also
-          reach us directly on WhatsApp for a faster response.
+          Thank you! We will call you within 2 hours. You can also reach us directly on WhatsApp for an even faster response.
         </p>
         <a
           href={WA_HREF}
@@ -437,6 +436,8 @@ function MapSection() {
   return (
     <section className="bg-gray-50 border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12">
+
+        {/* Section header */}
         <div className="mb-6 flex items-center justify-between flex-wrap gap-4">
           <div>
             <SectionLabel>Find Us</SectionLabel>
@@ -445,7 +446,7 @@ function MapSection() {
             </h2>
           </div>
           <a
-            href="https://maps.google.com/?q=Industrial+Area+Phase+2+Mohali+Punjab"
+            href="https://www.google.com/maps/place/Minebea+Technologies/@30.7223648,76.7041674,17z"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 border border-gray-200 text-[#111827] text-sm font-semibold px-4 py-2.5 rounded-sm hover:border-[#1E3A5F] hover:text-[#1E3A5F] transition-colors"
@@ -454,46 +455,40 @@ function MapSection() {
             Open in Google Maps
           </a>
         </div>
-      </div>
 
-      {/* Full-width map */}
-      <div className="w-full h-[420px] md:h-[500px] relative">
-        <iframe
-          title="Rite-Way location — Industrial Area Phase 2 Mohali Punjab"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3430.2936086959217!2d76.71!3d30.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fed0be66ef96b%3A0xa5ff801cac21b9f!2sIndustrial%20Area%20Phase%202%2C%20Sector%2059%2C%20Sahibzada%20Ajit%20Singh%20Nagar%2C%20Punjab!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-          width="100%"
-          height="100%"
-          style={{ border: 0, display: "block" }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
-        {/* Address overlay card */}
-        <div
-          className="absolute top-5 left-5 bg-white border border-gray-100 rounded-sm px-5 py-4 shadow-lg max-w-xs hidden md:block"
-          style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.10)" }}
-        >
-          <div className="flex items-start gap-3">
-            <div className="w-8 h-8 rounded-sm bg-[#DC2626] flex items-center justify-center flex-shrink-0 mt-0.5">
-              <MapPin size={14} className="text-white" />
-            </div>
-            <div>
-              <p className="text-xs font-bold text-[#111827] uppercase tracking-wide mb-0.5">
-                RITE-WAY by Minebea Technologies
-              </p>
-              <address className="not-italic text-xs text-gray-500 leading-relaxed">
-                Plot No. E-1, Industrial Area,<br />
-                Phase-2, Mohali, Punjab
-              </address>
-              <a
-                href="tel:+919877541199"
-                className="block mt-2 text-xs font-semibold text-[#DC2626] hover:underline"
-              >
-                +91 98775 41199
-              </a>
-            </div>
+        {/* Address strip above map */}
+        <div className="mb-5 flex items-start gap-3">
+          <div className="w-8 h-8 rounded-sm bg-[#DC2626] flex items-center justify-center flex-shrink-0 mt-0.5">
+            <MapPin size={13} className="text-white" />
+          </div>
+          <div>
+            <p className="text-xs font-bold text-[#111827] uppercase tracking-wide mb-0.5">
+              RITE-WAY by Minebea Technologies
+            </p>
+            <address className="not-italic text-xs text-gray-500 leading-relaxed">
+              Plot No. E-1, Industrial Area, Phase-2,<br />
+              Sahibzada Ajit Singh Nagar (Mohali), Punjab 160055
+            </address>
           </div>
         </div>
+
+        {/* Map iframe — fixed 400px height, responsive width */}
+        <div
+          className="rounded-sm border border-gray-200 overflow-hidden w-full"
+          style={{ height: "400px" }}
+        >
+          <iframe
+            title="Minebea Technologies — Rite-Way, Industrial Area Phase-2, Mohali Punjab"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3431.5!2d76.7041674!3d30.7223648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390f93e7895d6f3f%3A0xe85880d68344664!2sMinebea+Technologies!5e0!3m2!1sen!2sin!4v1234567890"
+            width="100%"
+            height="100%"
+            style={{ border: 0, display: "block" }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
+
       </div>
     </section>
   );
