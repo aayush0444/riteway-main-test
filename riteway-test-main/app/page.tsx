@@ -97,14 +97,18 @@ function HeroSection() {
     <section className="relative overflow-hidden">
       {/* Photo: Industrial weighbridge with truck on weighbridge platform */}
       <div className="absolute inset-0">
-        <ImgPlaceholder label="Industrial Weighbridge — Truck on Concrete Platform, Mohali" icon={Truck} height="100%" className="h-full" />
+        <img
+          src="/images/hero/weighbridge-hero.png"
+          alt="Industrial Weighbridge — Truck on Platform"
+          className="w-full h-full object-cover"
+        />
       </div>
       {/* Dark overlay for text readability */}
-      <div className="absolute inset-0 bg-[#111827]/70 pointer-events-none" />
+      <div className="absolute inset-0 bg-[#111827]/60 pointer-events-none" />
       {/* Red left accent */}
       <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626] z-10" aria-hidden="true" />
 
-<div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-24 md:pt-28 md:pb-32">
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-24 md:pt-28 md:pb-32">
         <div className="max-w-3xl">
 
           {/* Pre-label */}
@@ -337,8 +341,8 @@ function ProductIconGrid() {
                 )}
 
                 {/* Photo: {label} product */}
-              <ImgPlaceholder label={label} icon={Icon} badge="" aspect="4/3" className="rounded-sm -mx-5 -mt-5 mb-3" />
-              <div
+                <ImgPlaceholder label={label} icon={Icon} badge="" aspect="4/3" className="rounded-sm -mx-5 -mt-5 mb-3" />
+                <div
                   className="w-9 h-9 rounded-sm flex items-center justify-center flex-shrink-0 transition-all duration-150 group-hover:scale-110"
                   style={{ backgroundColor: badgeColor }}>
                   <Icon size={16} className="text-white" />
@@ -637,11 +641,11 @@ function IndustriesGrid() {
               {/* Photo: {label} industry environment */}
               <ImgPlaceholder label={label} icon={Icon} badge="" aspect="4/3" className="" />
               <div className="p-4">
-              <div className="w-11 h-11 rounded-sm bg-gray-50 group-hover:bg-red-50 flex items-center justify-center mx-auto mb-3 transition-colors duration-200">
-                <Icon size={20} className="text-[#1E3A5F] group-hover:text-[#DC2626] transition-colors duration-200" />
-              </div>
-              <p className="text-[#111827] font-semibold text-sm mb-1">{label}</p>
-              <p className="text-gray-400 text-xs">{desc}</p>
+                <div className="w-11 h-11 rounded-sm bg-gray-50 group-hover:bg-red-50 flex items-center justify-center mx-auto mb-3 transition-colors duration-200">
+                  <Icon size={20} className="text-[#1E3A5F] group-hover:text-[#DC2626] transition-colors duration-200" />
+                </div>
+                <p className="text-[#111827] font-semibold text-sm mb-1">{label}</p>
+                <p className="text-gray-400 text-xs">{desc}</p>
               </div>
             </Link>
           ))}
@@ -707,7 +711,7 @@ function CTABanner() {
               className="inline-flex items-center gap-2 bg-[#25D366] text-white text-sm font-semibold px-6 py-3.5 rounded-sm hover:bg-green-500 transition-colors duration-150 shadow-sm"
             >
               <svg width="16" height="16" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                <path fillRule="evenodd" clipRule="evenodd" d="M16 2C8.268 2 2 8.268 2 16c0 2.478.643 4.805 1.768 6.83L2 30l7.363-1.733A13.94 13.94 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.5a11.44 11.44 0 0 1-5.826-1.594l-.418-.248-4.368 1.028 1.055-4.258-.272-.437A11.44 11.44 0 0 1 4.5 16C4.5 9.648 9.648 4.5 16 4.5S27.5 9.648 27.5 16 22.352 27.5 16 27.5zm6.27-8.545c-.344-.172-2.035-1.004-2.35-1.118-.316-.115-.546-.172-.776.172-.23.344-.89 1.118-1.09 1.348-.2.23-.4.258-.745.086-.344-.172-1.453-.536-2.767-1.707-1.023-.912-1.713-2.038-1.913-2.382-.2-.344-.021-.53.15-.701.155-.155.344-.403.516-.604.172-.2.23-.344.344-.574.115-.23.057-.43-.029-.603-.086-.172-.776-1.872-1.063-2.563-.28-.673-.564-.582-.776-.593l-.66-.011c-.23 0-.603.086-.918.43-.316.344-1.205 1.177-1.205 2.87s1.234 3.33 1.406 3.56c.172.23 2.428 3.71 5.88 5.202.823.355 1.465.567 1.965.726.826.263 1.578.226 2.172.137.662-.099 2.035-.832 2.322-1.635.287-.803.287-1.49.2-1.635-.086-.144-.316-.23-.66-.402z" fill="white"/>
+                <path fillRule="evenodd" clipRule="evenodd" d="M16 2C8.268 2 2 8.268 2 16c0 2.478.643 4.805 1.768 6.83L2 30l7.363-1.733A13.94 13.94 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.5a11.44 11.44 0 0 1-5.826-1.594l-.418-.248-4.368 1.028 1.055-4.258-.272-.437A11.44 11.44 0 0 1 4.5 16C4.5 9.648 9.648 4.5 16 4.5S27.5 9.648 27.5 16 22.352 27.5 16 27.5zm6.27-8.545c-.344-.172-2.035-1.004-2.35-1.118-.316-.115-.546-.172-.776.172-.23.344-.89 1.118-1.09 1.348-.2.23-.4.258-.745.086-.344-.172-1.453-.536-2.767-1.707-1.023-.912-1.713-2.038-1.913-2.382-.2-.344-.021-.53.15-.701.155-.155.344-.403.516-.604.172-.2.23-.344.344-.574.115-.23.057-.43-.029-.603-.086-.172-.776-1.872-1.063-2.563-.28-.673-.564-.582-.776-.593l-.66-.011c-.23 0-.603.086-.918.43-.316.344-1.205 1.177-1.205 2.87s1.234 3.33 1.406 3.56c.172.23 2.428 3.71 5.88 5.202.823.355 1.465.567 1.965.726.826.263 1.578.226 2.172.137.662-.099 2.035-.832 2.322-1.635.287-.803.287-1.49.2-1.635-.086-.144-.316-.23-.66-.402z" fill="white" />
               </svg>
               WhatsApp Us Now
             </a>
