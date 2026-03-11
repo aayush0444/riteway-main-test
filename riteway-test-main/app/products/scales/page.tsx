@@ -15,7 +15,52 @@ import {
   Monitor,
   Cpu,
   ChevronRight,
+  LayoutGrid,
+  Calculator,
 } from "lucide-react";
+
+// ─── Reusable image placeholder ───────────────────────────────────────────────
+// Replace with next/image when real photos available. aspect-ratio keeps layout stable.
+function ImgPlaceholder({
+  label,
+  icon: Icon,
+  badge = "Photo Coming Soon",
+  aspect = "16/9",
+  height,
+  className = "",
+}: {
+  label: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  badge?: string;
+  aspect?: string;
+  height?: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={"w-full relative overflow-hidden " + className}
+      style={{
+        background: "#1E3A5F",
+        aspectRatio: height ? undefined : aspect,
+        height: height,
+      }}
+    >
+      {/* Dot-grid pattern */}
+      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+      {/* Vignette */}
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
+      {/* Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
+        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
+          <Icon size={28} className="text-white/70" />
+        </div>
+        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
+        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
+      </div>
+    </div>
+  );
+}
+
 
 // ─── Shared ───────────────────────────────────────────────────────────────────
 
@@ -148,18 +193,21 @@ function getRecommendation(industry: string, capacity: string): Rec {
 
 function Hero() {
   return (
-    <section className="relative bg-white border-b border-gray-100 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none"
-        style={{ backgroundImage: "linear-gradient(to right,#e5e7eb 1px,transparent 1px),linear-gradient(to bottom,#e5e7eb 1px,transparent 1px)", backgroundSize: "64px 64px", opacity: 0.4 }} />
-      <div className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 20%, white 100%)" }} />
-      <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626]" aria-hidden="true" />
+    <section className="relative overflow-hidden border-b border-gray-100">
+      {/* Photo: Weighing scales product range — hero background */}
+      <div className="absolute inset-0">
+        <ImgPlaceholder label="Rite-Way Weighing Scales — Complete Range, 20g to 2000kg" icon={Scale} height="100%" className="h-full" />
+      </div>
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-[#1E3A5F]/70 pointer-events-none" />
+      {/* Red left accent */}
+      <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626] z-10" aria-hidden="true" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-20 md:pt-20 md:pb-24">
-        <nav className="flex items-center gap-2 text-xs text-gray-400 mb-7 flex-wrap">
-          <Link href="/" className="hover:text-[#111827] transition-colors">Home</Link><span>/</span>
-          <Link href="/products" className="hover:text-[#111827] transition-colors">Products</Link><span>/</span>
-          <span className="text-[#111827] font-medium">Weighing Scales</span>
+        <nav className="flex items-center gap-2 text-xs text-white/50 mb-7 flex-wrap">
+          <Link href="/" className="hover:text-white transition-colors">Home</Link><span>/</span>
+          <Link href="/products" className="hover:text-white transition-colors">Products</Link><span>/</span>
+          <span className="text-white/90 font-medium">Weighing Scales</span>
         </nav>
 
         <div className="max-w-3xl">
@@ -175,11 +223,11 @@ function Hero() {
             </span>
           </div>
 
-          <h1 className="text-[#111827] font-bold leading-[1.07] tracking-tight mb-5"
+          <h1 className="text-white font-bold leading-[1.07] tracking-tight mb-5"
             style={{ fontSize: "clamp(2rem, 4.5vw, 3.2rem)" }}>
             Weighing Scales
           </h1>
-          <p className="text-gray-500 text-lg leading-relaxed mb-8 max-w-2xl">
+          <p className="text-white/75 text-lg leading-relaxed mb-8 max-w-2xl">
             From 20g jewel precision scales to 2000kg industrial floor scales —
             Rite-Way manufactures the complete range. ISO 9001:2015 certified.
             Every scale tested before dispatch.
@@ -196,10 +244,10 @@ function Hero() {
               <div key={label} className="flex items-center flex-1">
                 <div className="flex flex-col items-center">
                   <div className="w-2 h-2 rounded-full bg-[#DC2626]" />
-                  <p className="text-[#111827] font-bold text-xs mt-1">{label}</p>
-                  <p className="text-gray-400 text-[0.55rem] font-medium">{sub}</p>
+                  <p className="text-white font-bold text-xs mt-1">{label}</p>
+                  <p className="text-white/50 text-[0.55rem] font-medium">{sub}</p>
                 </div>
-                {i < 3 && <div className="flex-1 h-px bg-gradient-to-r from-[#DC2626] to-[#1E3A5F] mx-1 mb-5" />}
+                {i < 3 && <div className="flex-1 h-px bg-gradient-to-r from-[#DC2626] to-white/30 mx-1 mb-5" />}
               </div>
             ))}
           </div>

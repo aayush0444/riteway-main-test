@@ -13,7 +13,51 @@ import {
   BatteryFull,
   Monitor,
   Activity,
+  Camera,
 } from "lucide-react";
+
+// ─── Reusable image placeholder ───────────────────────────────────────────────
+// Replace with next/image when real photos available. aspect-ratio keeps layout stable.
+function ImgPlaceholder({
+  label,
+  icon: Icon,
+  badge = "Photo Coming Soon",
+  aspect = "16/9",
+  height,
+  className = "",
+}: {
+  label: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  badge?: string;
+  aspect?: string;
+  height?: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={"w-full relative overflow-hidden " + className}
+      style={{
+        background: "#1E3A5F",
+        aspectRatio: height ? undefined : aspect,
+        height: height,
+      }}
+    >
+      {/* Dot-grid pattern */}
+      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+      {/* Vignette */}
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
+      {/* Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
+        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
+          <Icon size={28} className="text-white/70" />
+        </div>
+        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
+        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
+      </div>
+    </div>
+  );
+}
+
 
 // ─── Shared ───────────────────────────────────────────────────────────────────
 
@@ -239,20 +283,8 @@ function VariantsGrid() {
                 className="bg-white border border-gray-100 rounded-sm overflow-hidden flex flex-col hover:shadow-lg transition-all duration-200 group"
                 style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
 
-                {/* Gradient header */}
-                <div className="h-36 relative overflow-hidden flex items-end"
-                  style={{ background: `linear-gradient(135deg, ${gradientFrom} 0%, ${gradientTo} 100%)` }}>
-                  <div className="absolute inset-0"
-                    style={{ backgroundImage: "linear-gradient(to right,rgba(255,255,255,0.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.07) 1px,transparent 1px)", backgroundSize: "20px 20px" }} />
-                  {/* Scale icon watermark */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                    <Scale size={64} className="text-white" />
-                  </div>
-                  <div className="relative px-5 pb-4 z-10">
-                    <p className="text-white/50 text-[0.58rem] font-bold uppercase tracking-widest mb-0.5">{name}</p>
-                    <p className="text-white font-bold text-base">{sub}</p>
-                  </div>
-                </div>
+                {/* Photo: {sub} Table Top Scale */}
+                <ImgPlaceholder label={sub} icon={Scale} aspect="4/3" className="" />
 
                 <div className="p-6 flex flex-col flex-1">
                   {/* Badge */}
@@ -383,6 +415,18 @@ function ComparisonTable() {
 }
 
 // ─── 5. Common Features ───────────────────────────────────────────────────────
+
+function RetailShopPhoto() {
+  return (
+    <section className="bg-white py-10 border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        {/* Photo placeholder: Table Top Scale in retail shop environment */}
+        <ImgPlaceholder label="Table Top Scale in Retail Shop Environment — Rite-Way" icon={Scale} aspect="21/9" className="rounded-sm" />
+        <p className="text-xs text-gray-400 mt-2 text-center">Table Top Scale — retail and kirana shop application</p>
+      </div>
+    </section>
+  );
+}
 
 function CommonFeatures() {
   return (
@@ -569,6 +613,7 @@ export default function TableTopScalesPage() {
       <HighlightsRow />
       <VariantsGrid />
       <ComparisonTable />
+      <RetailShopPhoto />
       <CommonFeatures />
       <PerfectFor />
       <RelatedScales />

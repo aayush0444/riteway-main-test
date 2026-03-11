@@ -13,7 +13,53 @@ import {
   Globe,
   Calendar,
   Factory,
+  Building2,
+  Camera,
+  HardHat,
 } from "lucide-react";
+
+// ─── Reusable image placeholder ───────────────────────────────────────────────
+// Replace with next/image when real photos available. aspect-ratio keeps layout stable.
+function ImgPlaceholder({
+  label,
+  icon: Icon,
+  badge = "Photo Coming Soon",
+  aspect = "16/9",
+  height,
+  className = "",
+}: {
+  label: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  badge?: string;
+  aspect?: string;
+  height?: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={"w-full relative overflow-hidden " + className}
+      style={{
+        background: "#1E3A5F",
+        aspectRatio: height ? undefined : aspect,
+        height: height,
+      }}
+    >
+      {/* Dot-grid pattern */}
+      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+      {/* Vignette */}
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
+      {/* Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
+        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
+          <Icon size={28} className="text-white/70" />
+        </div>
+        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
+        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
+      </div>
+    </div>
+  );
+}
+
 
 const WA_HREF = "https://wa.me/919877541199?text=" + encodeURIComponent("Hello Rite-Way, I would like to know more about Minebea Technologies. Please get in touch.");
 
@@ -37,14 +83,19 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 function Hero() {
   return (
-    <section className="relative bg-white border-b border-gray-100 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "linear-gradient(to right,#e5e7eb 1px,transparent 1px),linear-gradient(to bottom,#e5e7eb 1px,transparent 1px)", backgroundSize: "64px 64px", opacity: 0.4 }} />
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 80% 60% at 50% 50%, transparent 20%, white 100%)" }} />
-      <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626]" aria-hidden="true" />
+    <section className="relative overflow-hidden border-b border-gray-100">
+      {/* Photo: Minebea Technologies factory exterior — Mohali, Punjab */}
+      <div className="absolute inset-0">
+        <ImgPlaceholder label="Minebea Technologies — Mohali, Punjab · ISO 9001:2015 Certified Since 2004" icon={Building2} height="100%" className="h-full" />
+      </div>
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-[#1E3A5F]/70 pointer-events-none" />
+      {/* Red left accent */}
+      <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626] z-10" aria-hidden="true" />
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-20 md:pt-24 md:pb-28">
-        <nav className="flex items-center gap-2 text-xs text-gray-400 mb-7">
-          <Link href="/" className="hover:text-[#111827] transition-colors">Home</Link><span>/</span>
-          <span className="text-[#111827] font-medium">About</span>
+        <nav className="flex items-center gap-2 text-xs text-white/50 mb-7">
+          <Link href="/" className="hover:text-white transition-colors">Home</Link><span>/</span>
+          <span className="text-white/90 font-medium">About</span>
         </nav>
         <div className="max-w-2xl">
           <div className="flex flex-wrap gap-2 mb-5">
@@ -54,10 +105,10 @@ function Hero() {
             <span className="inline-flex items-center gap-1.5 text-[0.6rem] font-bold uppercase tracking-widest text-[#1E3A5F] bg-blue-50 border border-blue-100 px-2.5 py-1 rounded-full">Since 2004</span>
             <span className="inline-flex items-center gap-1.5 text-[0.6rem] font-bold uppercase tracking-widest text-gray-600 bg-gray-50 border border-gray-200 px-2.5 py-1 rounded-full">🇮🇳 Mohali, Punjab</span>
           </div>
-          <h1 className="text-[#111827] font-bold leading-[1.07] tracking-tight mb-5" style={{ fontSize: "clamp(2rem, 4.5vw, 3.2rem)" }}>
+          <h1 className="text-white font-bold leading-[1.07] tracking-tight mb-5" style={{ fontSize: "clamp(2rem, 4.5vw, 3.2rem)" }}>
             About Minebea Technologies
           </h1>
-          <p className="text-gray-500 text-xl leading-relaxed" style={{ fontStyle: "italic" }}>
+          <p className="text-white/75 text-xl leading-relaxed" style={{ fontStyle: "italic" }}>
             Two decades of precision. One unwavering commitment to quality.
           </p>
         </div>
@@ -137,6 +188,18 @@ function CompanyStory() {
 }
 
 // ─── 3. Timeline ─────────────────────────────────────────────────────────────
+
+function FactoryPhoto() {
+  return (
+    <section className="bg-white py-10 border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        {/* Photo placeholder: Minebea Technologies Factory — Mohali — HIGHEST TRUST-BUILDING IMAGE */}
+        <ImgPlaceholder label="Minebea Technologies Factory — Mohali, Punjab" icon={Building2} aspect="21/9" className="rounded-sm" />
+        <p className="text-xs text-gray-400 mt-2 text-center">Minebea Technologies manufacturing facility — Plot No. E-1, Industrial Area Phase-2, Mohali</p>
+      </div>
+    </section>
+  );
+}
 
 function Timeline() {
   const milestones = [
@@ -257,6 +320,18 @@ function QualityProcess() {
 }
 
 // ─── 5. Sales & Service ───────────────────────────────────────────────────────
+
+function EngineerPhoto() {
+  return (
+    <section className="bg-white py-10 border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        {/* Photo placeholder: Engineer testing weighbridge on-site */}
+        <ImgPlaceholder label="Engineer Testing Weighbridge On-Site — Calibration and Verification" icon={HardHat} aspect="21/9" className="rounded-sm" />
+        <p className="text-xs text-gray-400 mt-2 text-center">Site acceptance testing — calibration and Legal Metrology verification</p>
+      </div>
+    </section>
+  );
+}
 
 function SalesService() {
   const pillars = [
@@ -385,8 +460,10 @@ export default function AboutPage() {
     <>
       <Hero />
       <CompanyStory />
+      <FactoryPhoto />
       <Timeline />
       <QualityProcess />
+      <EngineerPhoto />
       <SalesService />
       <TrustBadges />
       <CTABanner />

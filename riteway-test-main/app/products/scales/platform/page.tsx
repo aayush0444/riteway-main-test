@@ -14,7 +14,52 @@ import {
   Gauge,
   Monitor,
   Droplets,
+  LayoutGrid,
+  Camera,
 } from "lucide-react";
+
+// ─── Reusable image placeholder ───────────────────────────────────────────────
+// Replace with next/image when real photos available. aspect-ratio keeps layout stable.
+function ImgPlaceholder({
+  label,
+  icon: Icon,
+  badge = "Photo Coming Soon",
+  aspect = "16/9",
+  height,
+  className = "",
+}: {
+  label: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  badge?: string;
+  aspect?: string;
+  height?: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={"w-full relative overflow-hidden " + className}
+      style={{
+        background: "#1E3A5F",
+        aspectRatio: height ? undefined : aspect,
+        height: height,
+      }}
+    >
+      {/* Dot-grid pattern */}
+      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+      {/* Vignette */}
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
+      {/* Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
+        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
+          <Icon size={28} className="text-white/70" />
+        </div>
+        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
+        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
+      </div>
+    </div>
+  );
+}
+
 
 const WA_BASE = "https://wa.me/919877541199?text=";
 
@@ -162,14 +207,10 @@ function VariantsGrid() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {variants.map(({ name, sub, badge, badgeClass, tag, gradientFrom, gradientTo, specs, highlights, waMsg }) => (
             <div key={sub} className="bg-white border border-gray-100 rounded-sm overflow-hidden flex flex-col hover:shadow-lg transition-all duration-200" style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
-              <div className="h-40 relative overflow-hidden flex items-end" style={{ background: `linear-gradient(135deg, ${gradientFrom} 0%, ${gradientTo} 100%)` }}>
-                <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(to right,rgba(255,255,255,0.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.07) 1px,transparent 1px)", backgroundSize: "20px 20px" }} />
-                <div className="absolute inset-0 flex items-center justify-center opacity-10"><Scale size={72} className="text-white" /></div>
-                {tag && <span className="absolute top-4 right-4 text-[0.58rem] font-bold uppercase tracking-widest text-white bg-[#DC2626] px-2.5 py-1 rounded-full">{tag}</span>}
-                <div className="relative px-5 pb-4 z-10">
-                  <p className="text-white/50 text-[0.58rem] font-bold uppercase tracking-widest mb-0.5">{name}</p>
-                  <p className="text-white font-bold text-base">{sub}</p>
-                </div>
+              {/* Photo: {sub} Platform Scale */}
+              <div className="relative">
+                <ImgPlaceholder label={sub} icon={LayoutGrid} aspect="4/3" className="" />
+                {tag && <span className="absolute top-3 right-3 text-[0.52rem] font-bold uppercase tracking-widest text-white bg-[#DC2626] px-2 py-0.5 rounded-full z-20">{tag}</span>}
               </div>
               <div className="p-6 flex flex-col flex-1">
                 <div className="mb-4">
@@ -284,6 +325,18 @@ function ComparisonTable() {
           All variants support up to 4×350Ω load cells, piece counting, and liter mode.
           Guard rail on Checked Pan variant prevents items from rolling off during weighment.
         </p>
+      </div>
+    </section>
+  );
+}
+
+function WarehousePhoto() {
+  return (
+    <section className="bg-white py-10 border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        {/* Photo placeholder: Platform Scale in warehouse */}
+        <ImgPlaceholder label="Platform Scale in Warehouse — Pallet and Barrel Weighing" icon={LayoutGrid} aspect="21/9" className="rounded-sm" />
+        <p className="text-xs text-gray-400 mt-2 text-center">Platform Scale — warehouse and cold storage application</p>
       </div>
     </section>
   );

@@ -11,7 +11,54 @@ import {
   Globe,
   TrendingUp,
   Car,
+  Layers,
+  Truck,
+  Camera,
+  Grid,
 } from "lucide-react";
+
+// ─── Reusable image placeholder ───────────────────────────────────────────────
+// Replace with next/image when real photos available. aspect-ratio keeps layout stable.
+function ImgPlaceholder({
+  label,
+  icon: Icon,
+  badge = "Photo Coming Soon",
+  aspect = "16/9",
+  height,
+  className = "",
+}: {
+  label: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  badge?: string;
+  aspect?: string;
+  height?: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={"w-full relative overflow-hidden " + className}
+      style={{
+        background: "#1E3A5F",
+        aspectRatio: height ? undefined : aspect,
+        height: height,
+      }}
+    >
+      {/* Dot-grid pattern */}
+      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+      {/* Vignette */}
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
+      {/* Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
+        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
+          <Icon size={28} className="text-white/70" />
+        </div>
+        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
+        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
+      </div>
+    </div>
+  );
+}
+
 
 // ─── Shared ───────────────────────────────────────────────────────────────────
 
@@ -99,29 +146,17 @@ const COMPARISON_ROWS = [
 
 function Hero() {
   return (
-    <section className="relative bg-white overflow-hidden border-b border-gray-100">
-      {/* Grid background */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        aria-hidden="true"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right,#e5e7eb 1px,transparent 1px),linear-gradient(to bottom,#e5e7eb 1px,transparent 1px)",
-          backgroundSize: "64px 64px",
-          opacity: 0.4,
-        }}
-      />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        aria-hidden="true"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 20%, white 100%)",
-        }}
-      />
-      <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626]" aria-hidden="true" />
+    <section className="relative overflow-hidden border-b border-gray-100">
+      {/* Photo placeholder: Concrete Weighbridge Platform with Truck — Why Concrete Outperforms Steel */}
+      <div className="absolute inset-0">
+        <ImgPlaceholder label="Concrete Weighbridge Platform with Truck — Why Concrete Outperforms Steel" icon={Layers} height="100%" className="h-full" />
+      </div>
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-[#1E3A5F]/70 pointer-events-none" />
+      {/* Red left accent */}
+      <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626] z-10" aria-hidden="true" />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-24 md:pt-28 md:pb-32">
+<div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-24 md:pt-28 md:pb-32">
         <div className="max-w-3xl">
           <div className="flex items-center gap-3 mb-6">
             <span className="h-px w-8 bg-[#DC2626]" />
@@ -129,7 +164,7 @@ function Hero() {
           </div>
 
           <h1
-            className="text-[#111827] font-bold leading-[1.07] tracking-tight mb-6"
+            className="text-white font-bold leading-[1.07] tracking-tight mb-6"
             style={{ fontSize: "clamp(2rem, 4.5vw, 3.4rem)" }}
           >
             Why Concrete Platform Weighbridges{" "}
@@ -137,11 +172,11 @@ function Hero() {
             in Every Way That Matters
           </h1>
 
-          <p className="text-gray-500 text-lg leading-relaxed mb-8 max-w-2xl">
+          <p className="text-white/75 text-lg leading-relaxed mb-8 max-w-2xl">
             Steel was once the default for weighbridge platforms. But steel bends,
             rattles, rusts, and fails — often within 15 years. The developed world
             figured this out decades ago. Today,{" "}
-            <strong className="text-[#111827] font-semibold">
+            <strong className="text-white font-semibold">
               95% of electronic weighbridges in Europe are built on concrete platforms.
             </strong>{" "}
             Rite-Way has been championing this standard in India for over 20 years.
@@ -168,13 +203,13 @@ function Hero() {
 
         {/* Europe stat callout — floats right on desktop */}
         <div
-          className="hidden lg:flex absolute right-10 top-1/2 -translate-y-1/2 flex-col items-center justify-center w-44 h-44 rounded-full border-2 border-[#DC2626] text-center"
-          style={{ boxShadow: "0 0 0 12px rgba(220,38,38,0.06)" }}
+          className="hidden lg:flex absolute right-10 top-1/2 -translate-y-1/2 flex-col items-center justify-center w-44 h-44 rounded-full border-2 border-[#DC2626] text-center bg-white/10 backdrop-blur-sm"
+          style={{ boxShadow: "0 0 0 12px rgba(220,38,38,0.08)" }}
         >
           <p className="text-[#DC2626] font-bold leading-none mb-1" style={{ fontSize: "3rem" }}>
             95%
           </p>
-          <p className="text-[#111827] text-xs font-semibold leading-snug px-3">
+          <p className="text-white/80 text-xs font-semibold leading-snug px-3">
             of weighbridges in Europe use concrete platform
           </p>
         </div>
@@ -259,6 +294,18 @@ function AdvantageCards() {
 }
 
 // ─── Europe Stat Banner ───────────────────────────────────────────────────────
+
+function EuropeanInstallationPhoto() {
+  return (
+    <section className="bg-white py-10 border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        {/* Photo placeholder: European Concrete Weighbridge Installation */}
+        <ImgPlaceholder label="European Concrete Weighbridge Installation — Industry Standard (95% Market Share)" icon={Layers} aspect="21/9" className="rounded-sm" />
+        <p className="text-xs text-gray-400 mt-2 text-center">95% of electronic weighbridges in Europe use concrete platform — the proven standard</p>
+      </div>
+    </section>
+  );
+}
 
 function EuropeBanner() {
   return (
@@ -399,6 +446,18 @@ const SIZES = [
   { size: "24×3m", capacity: "200T" },
 ];
 
+function ConcreteSteelComparisonPhoto() {
+  return (
+    <section className="bg-white py-10 border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        {/* Photo placeholder: Concrete vs Steel Platform side by side */}
+        <ImgPlaceholder label="Concrete vs Steel Weighbridge Platform — Side by Side Comparison" icon={Camera} aspect="21/9" className="rounded-sm" />
+        <p className="text-xs text-gray-400 mt-2 text-center">Visual comparison — concrete platform (left) vs steel platform (right)</p>
+      </div>
+    </section>
+  );
+}
+
 function SizesAvailable() {
   return (
     <section className="bg-gray-50 py-20 md:py-24 border-b border-gray-100">
@@ -522,8 +581,10 @@ export default function WhyConcretePage() {
     <>
       <Hero />
       <AdvantageCards />
+      <EuropeanInstallationPhoto />
       <EuropeBanner />
       <ComparisonTable />
+      <ConcreteSteelComparisonPhoto />
       <SizesAvailable />
       <CTABanner />
     </>

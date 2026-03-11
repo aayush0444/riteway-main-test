@@ -1,5 +1,13 @@
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, MapPin, Gauge, Wrench, ClipboardCheck, Camera } from "lucide-react";
+import { ArrowRight, CheckCircle2, MapPin, Gauge, Wrench, ClipboardCheck, Camera ,  Layers,
+  Grid,
+  LayoutGrid,
+  Gem,
+  Pickaxe,
+  Scale,
+  Building2,
+  Truck,
+} from "lucide-react";
 
 const WA_HREF = "https://wa.me/919877541199?text=" + encodeURIComponent("Hello Rite-Way, I would like to see installation examples from my industry. Please share photos and references.");
 
@@ -21,6 +29,49 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
     </span>
   );
 }
+
+// ─── Reusable image placeholder ───────────────────────────────────────────────
+// Replace with next/image when real photos available. aspect-ratio keeps layout stable.
+function ImgPlaceholder({
+  label,
+  icon: Icon,
+  badge = "Photo Coming Soon",
+  aspect = "16/9",
+  height,
+  className = "",
+}: {
+  label: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  badge?: string;
+  aspect?: string;
+  height?: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={"w-full relative overflow-hidden " + className}
+      style={{
+        background: "#1E3A5F",
+        aspectRatio: height ? undefined : aspect,
+        height: height,
+      }}
+    >
+      {/* Dot-grid pattern */}
+      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+      {/* Vignette */}
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
+      {/* Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
+        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
+          <Icon size={28} className="text-white/70" />
+        </div>
+        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
+        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
+      </div>
+    </div>
+  );
+}
+
 
 function Hero() {
   return (
@@ -88,70 +139,45 @@ function StatsRow() {
   );
 }
 
-function GalleryComingSoon() {
-  const industries = [
-    { label: "Grain Mandi",       count: "100+", color: "#166534" },
-    { label: "Manufacturing",     count: "80+",  color: "#1E3A5F" },
-    { label: "Mining & Quarry",   count: "60+",  color: "#374151" },
-    { label: "Logistics & Fleet", count: "70+",  color: "#0369a1" },
-    { label: "Cold Storage",      count: "40+",  color: "#1E3A5F" },
-    { label: "Government & PSU",  count: "50+",  color: "#DC2626" },
-    { label: "Construction",      count: "50+",  color: "#92400e" },
-    { label: "Retail & Kirana",   count: "50+",  color: "#374151" },
+function PhotoGallery() {
+  const GALLERY = [
+    { label: "Concrete Weighbridge — Punjab Factory",     icon: Layers,      cap: "80T"        },
+    { label: "Steel Weighbridge — Haryana Mandi",         icon: Grid,        cap: "60T"        },
+    { label: "Platform Scale — Cold Storage",             icon: LayoutGrid,  cap: "1000kg"     },
+    { label: "Jewel Scale — Jewellery Shop",              icon: Gem,         cap: "300g"       },
+    { label: "Weighbridge — Mining Site",                 icon: Pickaxe,     cap: "100T"       },
+    { label: "Table Top Scale — Retail Shop",             icon: Scale,       cap: "30kg"       },
+    { label: "Concrete Weighbridge — Government Site",    icon: Building2,   cap: "100T"       },
+    { label: "Platform Scale — Warehouse",                icon: LayoutGrid,  cap: "2000kg"     },
+    { label: "Weighbridge — Logistics Hub",               icon: Truck,       cap: "150T"       },
   ];
-
   return (
     <section className="bg-gray-50 py-20 md:py-24 border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="max-w-xl mb-12">
-          <SectionLabel>Photo Gallery</SectionLabel>
-          <h2 className="text-[#111827] font-bold text-3xl md:text-4xl leading-tight tracking-tight mb-3">
-            Installation Gallery Coming Soon
-          </h2>
+          <span className="inline-block text-[#DC2626] font-semibold mb-3" style={{ fontSize: "0.68rem", letterSpacing: "0.16em", textTransform: "uppercase" }}>Installation Gallery</span>
+          <h2 className="text-[#111827] font-bold text-3xl md:text-4xl leading-tight tracking-tight mb-3">500+ Installations</h2>
+          <p className="text-gray-500 text-base leading-relaxed">
+            Weighbridges and scales installed across Punjab, Haryana, Himachal Pradesh, J&K and Delhi NCR.
+            Photos of our completed installations will appear here shortly.
+          </p>
         </div>
-
-        {/* Coming soon card */}
-        <div className="bg-white border border-gray-100 rounded-sm overflow-hidden mb-10" style={{ boxShadow: "0 2px 20px rgba(0,0,0,0.05)" }}>
-          <div className="bg-[#1E3A5F] h-1" />
-          <div className="p-10 md:p-14 flex flex-col md:flex-row md:items-center gap-8">
-            <div className="w-16 h-16 rounded-sm bg-gray-50 border border-gray-200 flex items-center justify-center flex-shrink-0">
-              <Camera size={28} className="text-gray-300" />
-            </div>
-            <div className="flex-1">
-              <h3 className="text-[#111827] font-bold text-xl mb-3">
-                We Are Documenting Our 500+ Installations
-              </h3>
-              <p className="text-gray-500 text-base leading-relaxed mb-5">
-                Our engineering team is visiting completed installations across North India to photograph and document them properly. The gallery will be live shortly. In the meantime, WhatsApp us with your industry — we will send you reference photos and client contacts from similar installations directly.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <a href={WA_HREF} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-[#25D366] text-white text-sm font-semibold px-5 py-3 rounded-sm hover:bg-green-500 transition-colors">
-                  <WAIcon /> WhatsApp for Installation Photos
-                </a>
-                <a href="tel:+919877541199"
-                  className="inline-flex items-center gap-2 border border-gray-200 text-[#111827] text-sm font-semibold px-5 py-3 rounded-sm hover:border-[#DC2626] hover:text-[#DC2626] transition-colors">
-                  Call: +91 98775 41199
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Industry installation counts */}
-        <div className="max-w-xl mb-6">
-          <p className="text-[#111827] font-bold text-sm mb-1">Installations by Industry</p>
-          <p className="text-gray-400 text-xs">Approximate count of completed installations per sector.</p>
-        </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {industries.map(({ label, count, color }) => (
-            <div key={label}
-              className="bg-white border border-gray-100 rounded-sm p-4 hover:shadow-sm transition-all"
-              style={{ boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
-              <p className="font-bold text-xl mb-0.5" style={{ color }}>{count}</p>
-              <p className="text-gray-600 text-xs font-medium">{label}</p>
+        {/* 3×3 photo grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+          {GALLERY.map(({ label, icon: Icon, cap }) => (
+            <div key={label} className="rounded-sm overflow-hidden border border-gray-100" style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
+              {/* Photo placeholder: {label} */}
+              <ImgPlaceholder label={label} icon={Icon} badge={cap + " · Photo Coming Soon"} aspect="4/3" />
             </div>
           ))}
+        </div>
+        <div className="text-center">
+          <p className="text-gray-500 text-sm mb-4">Want to see installations from your specific industry?</p>
+          <a href="https://wa.me/919877541199?text=Hello%20Rite-Way%2C%20I%20would%20like%20to%20see%20installation%20photos%20from%20my%20industry."
+            target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-[#25D366] text-white text-sm font-semibold px-5 py-3 rounded-sm hover:bg-green-500 transition-colors">
+            WhatsApp for Industry Photos
+          </a>
         </div>
       </div>
     </section>
@@ -264,7 +290,7 @@ export default function InstallationsPage() {
     <>
       <Hero />
       <StatsRow />
-      <GalleryComingSoon />
+      <PhotoGallery />
       <InstallationProcess />
       <ClientTypes />
       <CTABanner />

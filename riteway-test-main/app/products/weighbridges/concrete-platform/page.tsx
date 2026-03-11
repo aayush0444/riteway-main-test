@@ -14,7 +14,52 @@ import {
   BarChart3,
   Mail,
   TrendingUp,
+  Truck,
+  Camera,
 } from "lucide-react";
+
+// ─── Reusable image placeholder ───────────────────────────────────────────────
+// Replace with next/image when real photos available. aspect-ratio keeps layout stable.
+function ImgPlaceholder({
+  label,
+  icon: Icon,
+  badge = "Photo Coming Soon",
+  aspect = "16/9",
+  height,
+  className = "",
+}: {
+  label: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  badge?: string;
+  aspect?: string;
+  height?: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={"w-full relative overflow-hidden " + className}
+      style={{
+        background: "#1E3A5F",
+        aspectRatio: height ? undefined : aspect,
+        height: height,
+      }}
+    >
+      {/* Dot-grid pattern */}
+      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+      {/* Vignette */}
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
+      {/* Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
+        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
+          <Icon size={28} className="text-white/70" />
+        </div>
+        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
+        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
+      </div>
+    </div>
+  );
+}
+
 
 // ─── Shared ───────────────────────────────────────────────────────────────────
 
@@ -121,32 +166,26 @@ const WHY_CONCRETE = [
 
 function Hero() {
   return (
-    <section className="relative bg-white border-b border-gray-100 overflow-hidden">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right,#e5e7eb 1px,transparent 1px),linear-gradient(to bottom,#e5e7eb 1px,transparent 1px)",
-          backgroundSize: "64px 64px",
-          opacity: 0.4,
-        }}
-      />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 20%, white 100%)" }}
-      />
-      <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626]" aria-hidden="true" />
+    <section className="relative overflow-hidden border-b border-gray-100">
+      {/* Photo placeholder: Concrete Platform Weighbridge — Pit Type Installation, Mohali Punjab */}
+      <div className="absolute inset-0">
+        <ImgPlaceholder label="Concrete Platform Weighbridge — Pit Type Installation, Mohali Punjab" icon={Layers} height="100%" className="h-full" />
+      </div>
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-[#1E3A5F]/70 pointer-events-none" />
+      {/* Red left accent */}
+      <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626] z-10" aria-hidden="true" />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-20 md:pt-20 md:pb-28">
+<div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-20 md:pt-20 md:pb-28">
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-xs text-gray-400 mb-7" aria-label="Breadcrumb">
-          <Link href="/" className="hover:text-[#111827] transition-colors">Home</Link>
+        <nav className="flex items-center gap-2 text-xs text-white/50 mb-7" aria-label="Breadcrumb">
+          <Link href="/" className="hover:text-white transition-colors">Home</Link>
           <span>/</span>
-          <Link href="/products" className="hover:text-[#111827] transition-colors">Products</Link>
+          <Link href="/products" className="hover:text-white transition-colors">Products</Link>
           <span>/</span>
-          <Link href="/products/weighbridges" className="hover:text-[#111827] transition-colors">Weighbridges</Link>
+          <Link href="/products/weighbridges" className="hover:text-white transition-colors">Weighbridges</Link>
           <span>/</span>
-          <span className="text-[#111827] font-medium">Concrete Platform</span>
+          <span className="text-white/90 font-medium">Concrete Platform</span>
         </nav>
 
         <div className="max-w-3xl">
@@ -165,13 +204,13 @@ function Hero() {
           </div>
 
           <h1
-            className="text-[#111827] font-bold leading-[1.07] tracking-tight mb-5"
+            className="text-white font-bold leading-[1.07] tracking-tight mb-5"
             style={{ fontSize: "clamp(2rem, 4.5vw, 3.2rem)" }}
           >
             Concrete Platform Weighbridge
           </h1>
 
-          <p className="text-gray-500 text-lg leading-relaxed mb-8 max-w-2xl">
+          <p className="text-white/75 text-lg leading-relaxed mb-8 max-w-2xl">
             The most durable, accurate, and cost-effective weighbridge platform available.
             Rigid monolithic RCC construction — 100-year lifespan, zero maintenance,
             40% lower material cost than steel. Cast on-site. Available in pit type and
@@ -363,28 +402,20 @@ function InstallationTypes() {
             className="border border-gray-100 rounded-sm overflow-hidden hover:shadow-lg transition-shadow duration-200"
             style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}
           >
-            {/* Visual placeholder */}
+            {/* Product placeholder */}
             <div
-              className="h-44 relative overflow-hidden flex items-end"
-              style={{ background: "linear-gradient(135deg, #1E3A5F 0%, #2d5a8e 100%)" }}
+              className="h-44 relative overflow-hidden flex flex-col items-center justify-center gap-3"
+              style={{ background: "#1E3A5F" }}
             >
-              <div
-                className="absolute inset-0"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(to right,rgba(255,255,255,0.12) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.12) 1px,transparent 1px)",
-                  backgroundSize: "24px 24px",
-                }}
-              />
-              {/* Below-ground indicator */}
-              <div className="absolute top-4 right-5 flex flex-col items-center gap-1 opacity-40">
-                <div className="w-16 h-2 bg-white/50 rounded-full" />
-                <div className="w-12 h-8 border-2 border-white/50 rounded-sm" />
-                <div className="text-white text-[0.5rem] font-bold uppercase tracking-widest">Ground level</div>
-              </div>
-              <div className="relative px-5 pb-4 z-10">
-                <p className="text-white/50 text-[0.58rem] font-bold uppercase tracking-widest mb-0.5">Installation type</p>
-                <p className="text-white font-bold text-base">Pit Type</p>
+              {/* Subtle grid pattern */}
+              <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(to right,rgba(255,255,255,0.06) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.06) 1px,transparent 1px)", backgroundSize: "28px 28px" }} />
+              {/* Icon */}
+              <div className="relative z-10 flex flex-col items-center gap-2.5">
+                <div className="w-12 h-12 rounded-sm bg-white/10 flex items-center justify-center">
+                  <Layers size={24} className="text-white/80" />
+                </div>
+                <p className="text-white font-bold text-sm tracking-tight text-center px-4">Concrete Platform — Pit Type</p>
+                <span className="text-[0.58rem] font-bold uppercase tracking-widest text-white bg-white/15 px-2.5 py-1 rounded-full">40T – 200T</span>
               </div>
             </div>
 
@@ -419,26 +450,16 @@ function InstallationTypes() {
             style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}
           >
             <div
-              className="h-44 relative overflow-hidden flex items-end"
-              style={{ background: "linear-gradient(135deg, #163050 0%, #1E3A5F 100%)" }}
+              className="h-44 relative overflow-hidden"
+              style={{ background: "#1E3A5F" }}
             >
-              <div
-                className="absolute inset-0"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(to right,rgba(255,255,255,0.12) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.12) 1px,transparent 1px)",
-                  backgroundSize: "24px 24px",
-                }}
-              />
-              {/* Above-ground indicator */}
-              <div className="absolute top-4 right-5 flex flex-col items-end gap-1 opacity-40">
-                <div className="w-12 h-6 border-2 border-white/50 rounded-sm" />
-                <div className="w-6 h-3 bg-white/40 rounded-sm" />
-                <div className="text-white text-[0.5rem] font-bold uppercase tracking-widest">With ramps</div>
-              </div>
-              <div className="relative px-5 pb-4 z-10">
-                <p className="text-white/50 text-[0.58rem] font-bold uppercase tracking-widest mb-0.5">Installation type</p>
-                <p className="text-white font-bold text-base">Pitless / Surface Type</p>
+              <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(to right,rgba(255,255,255,0.06) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.06) 1px,transparent 1px)", backgroundSize: "28px 28px" }} />
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2.5 z-10">
+                <div className="w-12 h-12 rounded-sm bg-white/10 flex items-center justify-center">
+                  <Layers size={24} className="text-white/80" />
+                </div>
+                <p className="text-white font-bold text-sm tracking-tight text-center px-4">Concrete Platform — Pitless</p>
+                <span className="text-[0.58rem] font-bold uppercase tracking-widest text-white bg-white/15 px-2.5 py-1 rounded-full">Surface Type</span>
               </div>
             </div>
 
@@ -474,6 +495,27 @@ function InstallationTypes() {
 }
 
 // ─── 4. Size Table ────────────────────────────────────────────────────────────
+
+function InstallationPhotoRow() {
+  return (
+    <section className="bg-white py-10 border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Photo placeholder: Pit Type Installation View */}
+          <div>
+            <ImgPlaceholder label="Pit Type Installation — Platform Flush with Ground" icon={Layers} aspect="4/3" className="rounded-sm" />
+            <p className="text-xs text-gray-400 mt-2 text-center">Pit Type Installation</p>
+          </div>
+          {/* Photo placeholder: Pitless Surface Type Installation View */}
+          <div>
+            <ImgPlaceholder label="Pitless Surface Type — Ramp Approach View" icon={Layers} aspect="4/3" className="rounded-sm" />
+            <p className="text-xs text-gray-400 mt-2 text-center">Pitless (Surface Type) Installation</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function SizeTable() {
   return (
@@ -591,6 +633,18 @@ function HowItWorks() {
 }
 
 // ─── 6. Why Choose Concrete ───────────────────────────────────────────────────
+
+function CastingPhoto() {
+  return (
+    <section className="bg-gray-50 py-10 border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        {/* Photo placeholder: Concrete casting in progress on-site */}
+        <ImgPlaceholder label="Concrete Platform Casting in Progress — On-Site Installation" icon={Camera} aspect="21/9" className="rounded-sm" />
+        <p className="text-xs text-gray-400 mt-2 text-center">RCC platform being cast on-site — no transport cost</p>
+      </div>
+    </section>
+  );
+}
 
 function WhyConcreteSection() {
   return (
@@ -765,9 +819,11 @@ export default function ConcreteWeighbridgePage() {
       <Hero />
       <HighlightsRow />
       <TechnicalSpecs />
+      <InstallationPhotoRow />
       <InstallationTypes />
       <SizeTable />
       <HowItWorks />
+      <CastingPhoto />
       <WhyConcreteSection />
       <CompatibleTerminals />
       <CTABanner />

@@ -25,7 +25,52 @@ import {
   LayoutGrid,
   Calculator,
   Gem,
+  Anchor,
+  User,
 } from "lucide-react";
+
+// ─── Reusable image placeholder ───────────────────────────────────────────────
+// Replace with next/image when real photos available. aspect-ratio keeps layout stable.
+function ImgPlaceholder({
+  label,
+  icon: Icon,
+  badge = "Photo Coming Soon",
+  aspect = "16/9",
+  height,
+  className = "",
+}: {
+  label: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  badge?: string;
+  aspect?: string;
+  height?: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={"w-full relative overflow-hidden " + className}
+      style={{
+        background: "#1E3A5F",
+        aspectRatio: height ? undefined : aspect,
+        height: height,
+      }}
+    >
+      {/* Dot-grid pattern */}
+      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+      {/* Vignette */}
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
+      {/* Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
+        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
+          <Icon size={28} className="text-white/70" />
+        </div>
+        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
+        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
+      </div>
+    </div>
+  );
+}
+
 
 // ─── Shared helpers ───────────────────────────────────────────────────────────
 
@@ -49,45 +94,28 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-white">
-      {/* Background: subtle geometric grid pattern */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        aria-hidden="true"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, #e5e7eb 1px, transparent 1px),
-            linear-gradient(to bottom, #e5e7eb 1px, transparent 1px)
-          `,
-          backgroundSize: "64px 64px",
-          opacity: 0.45,
-        }}
-      />
-      {/* Radial fade mask so grid fades to white at edges */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        aria-hidden="true"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 40%, transparent 30%, white 100%)",
-        }}
-      />
+    <section className="relative overflow-hidden">
+      {/* Photo: Industrial weighbridge with truck on weighbridge platform */}
+      <div className="absolute inset-0">
+        <ImgPlaceholder label="Industrial Weighbridge — Truck on Concrete Platform, Mohali" icon={Truck} height="100%" className="h-full" />
+      </div>
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-[#111827]/70 pointer-events-none" />
+      {/* Red left accent */}
+      <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626] z-10" aria-hidden="true" />
 
-      {/* Red left accent bar */}
-      <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626]" aria-hidden="true" />
-
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-24 md:pt-28 md:pb-32">
+<div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-24 md:pt-28 md:pb-32">
         <div className="max-w-3xl">
 
           {/* Pre-label */}
           <div className="flex items-center gap-3 mb-6">
             <span className="h-px w-8 bg-[#DC2626]" />
-            <SectionLabel>ISO 9001:2015 Certified · Since 2004</SectionLabel>
+            <span className="text-white/70 text-[0.7rem] font-bold uppercase tracking-widest">ISO 9001:2015 Certified · Since 2004</span>
           </div>
 
           {/* Main headline */}
           <h1
-            className="text-[#111827] font-bold leading-[1.08] tracking-tight mb-6"
+            className="text-white font-bold leading-[1.08] tracking-tight mb-6"
             style={{ fontSize: "clamp(2.2rem, 5vw, 3.6rem)" }}
           >
             India&apos;s Most Trusted{" "}
@@ -96,7 +124,7 @@ function HeroSection() {
           </h1>
 
           {/* Subtext */}
-          <p className="text-gray-500 text-lg leading-relaxed mb-8 max-w-2xl">
+          <p className="text-white/80 text-lg leading-relaxed mb-8 max-w-2xl">
             From 20g precision jewel scales to 200-ton concrete platform weighbridges.
             ISO 9001:2015 certified. Manufactured and serviced across all of North India
             — by Minebea Technologies since 2004.
@@ -113,7 +141,7 @@ function HeroSection() {
             </Link>
             <Link
               href="/products"
-              className="inline-flex items-center gap-2 border border-gray-300 text-[#111827] text-sm font-semibold px-6 py-3.5 rounded-sm hover:border-[#1E3A5F] hover:text-[#1E3A5F] transition-colors duration-150"
+              className="inline-flex items-center gap-2 border border-white/40 text-white text-sm font-semibold px-6 py-3.5 rounded-sm hover:border-white hover:bg-white/10 transition-colors duration-150"
             >
               View Products
             </Link>
@@ -122,14 +150,14 @@ function HeroSection() {
           {/* Click-to-call */}
           <a
             href="tel:+919877541199"
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-[#DC2626] transition-colors duration-150 group"
+            className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors duration-150 group"
           >
-            <span className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-[#DC2626] transition-colors">
-              <Phone size={14} className="text-[#1E3A5F] group-hover:text-[#DC2626] transition-colors" />
+            <span className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center group-hover:border-white transition-colors">
+              <Phone size={14} className="text-white/70 group-hover:text-white transition-colors" />
             </span>
             <span>
-              <span className="text-gray-400 text-xs block leading-none mb-0.5">Call us now</span>
-              <span className="font-semibold text-[#111827] group-hover:text-[#DC2626] transition-colors">
+              <span className="text-white/50 text-xs block leading-none mb-0.5">Call us now</span>
+              <span className="font-semibold text-white group-hover:text-white transition-colors">
                 +91 98775 41199
               </span>
             </span>
@@ -145,11 +173,10 @@ function HeroSection() {
           ].map((s) => (
             <div
               key={s.value}
-              className="bg-white border border-gray-100 rounded-sm px-5 py-4 shadow-sm w-36 text-center"
-              style={{ boxShadow: "0 2px 16px rgba(30,58,95,0.07)" }}
+              className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-sm px-5 py-4 w-36 text-center"
             >
               <p className="text-[#DC2626] font-bold text-2xl leading-none">{s.value}</p>
-              <p className="text-gray-400 text-xs mt-1 uppercase tracking-wide font-medium">{s.label}</p>
+              <p className="text-white/60 text-xs mt-1 uppercase tracking-wide font-medium">{s.label}</p>
             </div>
           ))}
         </div>
@@ -309,7 +336,9 @@ function ProductIconGrid() {
                   </span>
                 )}
 
-                <div
+                {/* Photo: {label} product */}
+              <ImgPlaceholder label={label} icon={Icon} badge="" aspect="4/3" className="rounded-sm -mx-5 -mt-5 mb-3" />
+              <div
                   className="w-9 h-9 rounded-sm flex items-center justify-center flex-shrink-0 transition-all duration-150 group-hover:scale-110"
                   style={{ backgroundColor: badgeColor }}>
                   <Icon size={16} className="text-white" />
@@ -397,6 +426,12 @@ function WhyConcreteTeaser() {
               <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
             </div>
           ))}
+        </div>
+
+        {/* Photo: Concrete weighbridge platform — installation view */}
+        <div className="mb-10">
+          <ImgPlaceholder label="Concrete Weighbridge Platform — Installation View, Punjab" icon={Layers} aspect="21/9" className="rounded-sm" />
+          <p className="text-xs text-gray-400 mt-2 text-center">Concrete platform weighbridge — rigid RCC construction, 100-year lifespan</p>
         </div>
 
         <Link
@@ -597,13 +632,17 @@ function IndustriesGrid() {
             <Link
               href="/industries"
               key={label}
-              className="group border border-gray-100 rounded-sm p-6 text-center hover:border-[#DC2626] hover:shadow-sm transition-all duration-200"
+              className="group border border-gray-100 rounded-sm overflow-hidden text-center hover:border-[#DC2626] hover:shadow-sm transition-all duration-200 flex flex-col"
             >
-              <div className="w-11 h-11 rounded-sm bg-gray-50 group-hover:bg-red-50 flex items-center justify-center mx-auto mb-4 transition-colors duration-200">
+              {/* Photo: {label} industry environment */}
+              <ImgPlaceholder label={label} icon={Icon} badge="" aspect="4/3" className="" />
+              <div className="p-4">
+              <div className="w-11 h-11 rounded-sm bg-gray-50 group-hover:bg-red-50 flex items-center justify-center mx-auto mb-3 transition-colors duration-200">
                 <Icon size={20} className="text-[#1E3A5F] group-hover:text-[#DC2626] transition-colors duration-200" />
               </div>
               <p className="text-[#111827] font-semibold text-sm mb-1">{label}</p>
               <p className="text-gray-400 text-xs">{desc}</p>
+              </div>
             </Link>
           ))}
         </div>

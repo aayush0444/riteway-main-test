@@ -13,6 +13,7 @@ import {
   Package,
   Shield,
   TrendingDown,
+  Monitor,
 } from "lucide-react";
 
 const WA_HREF =
@@ -37,11 +38,55 @@ function WAIcon({ size = 14 }: { size?: number }) {
   );
 }
 
+// ─── Reusable image placeholder ───────────────────────────────────────────────
+// Replace with next/image when real photos available. aspect-ratio keeps layout stable.
+function ImgPlaceholder({
+  label,
+  icon: Icon,
+  badge = "Photo Coming Soon",
+  aspect = "16/9",
+  height,
+  className = "",
+}: {
+  label: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  badge?: string;
+  aspect?: string;
+  height?: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={"w-full relative overflow-hidden " + className}
+      style={{
+        background: "#1E3A5F",
+        aspectRatio: height ? undefined : aspect,
+        height: height,
+      }}
+    >
+      {/* Dot-grid pattern */}
+      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+      {/* Vignette */}
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
+      {/* Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
+        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
+          <Icon size={28} className="text-white/70" />
+        </div>
+        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
+        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
+      </div>
+    </div>
+  );
+}
+
+
 function Hero() {
   return (
-    <section className="relative bg-white border-b border-gray-100 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "linear-gradient(to right,#e5e7eb 1px,transparent 1px),linear-gradient(to bottom,#e5e7eb 1px,transparent 1px)", backgroundSize: "64px 64px", opacity: 0.4 }} />
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 20%, white 100%)" }} />
+    <section className="relative bg-[#1E3A5F] border-b border-gray-100 overflow-hidden">
+      {/* Photo placeholder: Fleet of vehicles at mining site */}
+      <div className="absolute inset-0"><ImgPlaceholder label="Fleet of Vehicles at Mining Site — Payload Monitoring" icon={Truck} height="100%" className="h-full" /></div>
+      <div className="absolute inset-0 bg-[#1E3A5F]/72 pointer-events-none" />
       <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626]" aria-hidden="true" />
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-20 md:pt-20 md:pb-28">
         <nav className="flex items-center gap-2 text-xs text-gray-400 mb-7 flex-wrap">
@@ -57,7 +102,7 @@ function Hero() {
               <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />Cloud Connected
             </span>
           </div>
-          <h1 className="text-[#111827] font-bold leading-[1.07] tracking-tight mb-5" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>Payload-T GPRS System</h1>
+          <h1 className="text-white font-bold leading-[1.07] tracking-tight mb-5" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>Payload-T GPRS System</h1>
           <p className="text-gray-500 text-lg leading-relaxed mb-8 max-w-2xl">
             Real-time vehicle payload monitoring with a cloud-based reporting dashboard.
             Overload alerts sent directly to your phone. Designed for mining companies,
@@ -205,6 +250,18 @@ function FeaturesSection() {
   );
 }
 
+function DashboardPhoto() {
+  return (
+    <section className="bg-white py-10 border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        {/* Photo placeholder: Cloud Dashboard Screenshot */}
+        <ImgPlaceholder label="Cloud Dashboard Screenshot — Real-Time Fleet Payload Monitoring" icon={Monitor} aspect="21/9" className="rounded-sm" />
+        <p className="text-xs text-gray-400 mt-2 text-center">Live cloud dashboard — vehicle payload, overload alerts, reports</p>
+      </div>
+    </section>
+  );
+}
+
 function PerfectFor() {
   const useCases = [
     { icon: Pickaxe, title: "Mining Companies",                 desc: "Monitor payload of every haul truck leaving the mine — prevent government overloading fines at checkpoints." },
@@ -319,6 +376,7 @@ export default function PayloadGPRSPage() {
       <HighlightsRow />
       <HowItWorks />
       <FeaturesSection />
+      <DashboardPhoto />
       <PerfectFor />
       <BusinessBenefits />
       <CTABanner />

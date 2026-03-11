@@ -11,7 +11,52 @@ import {
   BarChart3,
   Mail,
   Wifi,
+  Layers,
+  Grid,
 } from "lucide-react";
+
+// ─── Reusable image placeholder ───────────────────────────────────────────────
+// Replace with next/image when real photos available. aspect-ratio keeps layout stable.
+function ImgPlaceholder({
+  label,
+  icon: Icon,
+  badge = "Photo Coming Soon",
+  aspect = "16/9",
+  height,
+  className = "",
+}: {
+  label: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  badge?: string;
+  aspect?: string;
+  height?: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={"w-full relative overflow-hidden " + className}
+      style={{
+        background: "#1E3A5F",
+        aspectRatio: height ? undefined : aspect,
+        height: height,
+      }}
+    >
+      {/* Dot-grid pattern */}
+      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+      {/* Vignette */}
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
+      {/* Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
+        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
+          <Icon size={28} className="text-white/70" />
+        </div>
+        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
+        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
+      </div>
+    </div>
+  );
+}
+
 
 // ─── Shared ───────────────────────────────────────────────────────────────────
 
@@ -172,45 +217,38 @@ const SIZES = [
 
 function Hero() {
   return (
-    <section className="relative bg-white border-b border-gray-100 overflow-hidden">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        aria-hidden="true"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right,#e5e7eb 1px,transparent 1px),linear-gradient(to bottom,#e5e7eb 1px,transparent 1px)",
-          backgroundSize: "64px 64px",
-          opacity: 0.4,
-        }}
-      />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 20%, white 100%)" }}
-      />
-      <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626]" aria-hidden="true" />
+    <section className="relative overflow-hidden border-b border-gray-100">
+      {/* Photo: Rite-Way weighbridge installation — hero background */}
+      <div className="absolute inset-0">
+        <ImgPlaceholder label="Rite-Way Weighbridge Installation — Mohali, Punjab" icon={Truck} height="100%" className="h-full" />
+      </div>
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-[#1E3A5F]/70 pointer-events-none" />
+      {/* Red left accent */}
+      <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626] z-10" aria-hidden="true" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-20 md:pt-20 md:pb-24">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-xs text-gray-400 mb-6">
-          <Link href="/" className="hover:text-[#111827] transition-colors">Home</Link>
+        <div className="flex items-center gap-2 text-xs text-white/50 mb-6">
+          <Link href="/" className="hover:text-white transition-colors">Home</Link>
           <span>/</span>
-          <Link href="/products" className="hover:text-[#111827] transition-colors">Products</Link>
+          <Link href="/products" className="hover:text-white transition-colors">Products</Link>
           <span>/</span>
-          <span className="text-[#111827] font-medium">Weighbridges</span>
+          <span className="text-white/90 font-medium">Weighbridges</span>
         </div>
 
         <div className="max-w-3xl">
           <div className="flex items-center gap-3 mb-5">
             <span className="h-px w-8 bg-[#DC2626]" />
-            <SectionLabel>Heavy Industrial · 40T to 200T</SectionLabel>
+            <span className="text-white/60 font-semibold" style={{ fontSize: "0.68rem", letterSpacing: "0.16em", textTransform: "uppercase" }}>Heavy Industrial · 40T to 200T</span>
           </div>
           <h1
-            className="text-[#111827] font-bold leading-[1.07] tracking-tight mb-5"
+            className="text-white font-bold leading-[1.07] tracking-tight mb-5"
             style={{ fontSize: "clamp(2rem, 4.5vw, 3.2rem)" }}
           >
             Industrial Weighbridges
           </h1>
-          <p className="text-gray-500 text-lg leading-relaxed mb-8 max-w-2xl">
+          <p className="text-white/75 text-lg leading-relaxed mb-8 max-w-2xl">
             40T to 200T capacity. Pit type and pitless. Concrete and steel deck.
             ISO 9001:2015 certified. Installed, calibrated, and verified on-site
             across all of North India by Rite-Way since 2004.
@@ -231,7 +269,7 @@ function Hero() {
             </a>
             <Link
               href="/why-concrete"
-              className="inline-flex items-center gap-2 border border-gray-200 text-[#111827] text-sm font-semibold px-6 py-3 rounded-sm hover:border-[#1E3A5F] hover:text-[#1E3A5F] transition-colors"
+              className="inline-flex items-center gap-2 border border-white/30 text-white text-sm font-semibold px-6 py-3 rounded-sm hover:border-white hover:bg-white/10 transition-colors"
             >
               Why Concrete?
             </Link>
@@ -245,52 +283,29 @@ function Hero() {
 // ─── 2. Product Cards ─────────────────────────────────────────────────────────
 
 function PlaceholderImage({
-  from,
-  to,
-  patternOpacity,
   title,
   subtitle,
+  icon: Icon = Truck,
 }: {
-  from: string;
-  to: string;
-  patternOpacity: number;
+  from?: string;
+  to?: string;
+  patternOpacity?: number;
   title: string;
   subtitle: string;
+  icon?: React.ComponentType<{ size?: number; className?: string }>;
 }) {
   return (
-    <div
-      className="w-full h-48 relative overflow-hidden flex items-end"
-      style={{ background: `linear-gradient(135deg, ${from} 0%, ${to} 100%)` }}
-    >
-      {/* Grid pattern overlay */}
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right,rgba(255,255,255,0.15) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.15) 1px,transparent 1px)",
-          backgroundSize: "32px 32px",
-          opacity: patternOpacity * 8,
-        }}
-      />
-      {/* Corner accent circle */}
-      <div
-        className="absolute -top-8 -right-8 w-32 h-32 rounded-full opacity-10"
-        style={{ background: "white" }}
-      />
-      <div
-        className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full opacity-10"
-        style={{ background: "white" }}
-      />
-      {/* Text label */}
-      <div className="relative px-5 pb-4 z-10">
-        <p className="text-white/50 text-[0.6rem] font-bold uppercase tracking-widest mb-0.5">
-          {subtitle}
-        </p>
-        <p className="text-white font-bold text-base leading-snug">{title}</p>
-      </div>
-      {/* Truck icon watermark */}
-      <div className="absolute top-4 right-5 opacity-10">
-        <Truck size={48} className="text-white" />
+    /* Photo: {title} */
+    <div className="w-full relative overflow-hidden" style={{ background: "#1E3A5F", aspectRatio: "16/9" }}>
+      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.13) 1px, transparent 1px)", backgroundSize: "22px 22px" }} />
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.30) 100%)" }} />
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-6 text-center">
+        <div className="w-14 h-14 rounded-sm bg-white/10 border border-white/10 flex items-center justify-center">
+          <Icon size={26} className="text-white/65" />
+        </div>
+        <p className="text-white font-semibold text-sm md:text-base leading-snug max-w-xs tracking-tight">{title}</p>
+        <p className="text-white/40 text-[0.58rem] font-bold uppercase tracking-widest">{subtitle}</p>
+        <span className="text-[0.58rem] font-bold uppercase tracking-[0.14em] text-white/35 bg-black/25 px-3 py-1 rounded-full">Photo Coming Soon</span>
       </div>
     </div>
   );

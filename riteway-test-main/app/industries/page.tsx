@@ -12,7 +12,53 @@ import {
   MapPin,
   Clock,
   MessageSquare,
+  HardHat,
+  Tractor,
+  ShoppingBag,
 } from "lucide-react";
+
+// ─── Reusable image placeholder ───────────────────────────────────────────────
+// Replace with next/image when real photos available. aspect-ratio keeps layout stable.
+function ImgPlaceholder({
+  label,
+  icon: Icon,
+  badge = "Photo Coming Soon",
+  aspect = "16/9",
+  height,
+  className = "",
+}: {
+  label: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  badge?: string;
+  aspect?: string;
+  height?: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={"w-full relative overflow-hidden " + className}
+      style={{
+        background: "#1E3A5F",
+        aspectRatio: height ? undefined : aspect,
+        height: height,
+      }}
+    >
+      {/* Dot-grid pattern */}
+      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+      {/* Vignette */}
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
+      {/* Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
+        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
+          <Icon size={28} className="text-white/70" />
+        </div>
+        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
+        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
+      </div>
+    </div>
+  );
+}
+
 
 const WA_BASE = "https://wa.me/919877541199?text=";
 
@@ -119,24 +165,29 @@ const INDUSTRIES = [
 
 function Hero() {
   return (
-    <section className="relative bg-white border-b border-gray-100 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "linear-gradient(to right,#e5e7eb 1px,transparent 1px),linear-gradient(to bottom,#e5e7eb 1px,transparent 1px)", backgroundSize: "64px 64px", opacity: 0.4 }} />
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 80% 60% at 50% 50%, transparent 20%, white 100%)" }} />
-      <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626]" aria-hidden="true" />
+    <section className="relative overflow-hidden border-b border-gray-100">
+      {/* Photo: Industries collage — grain mandi, mining, factory, logistics */}
+      <div className="absolute inset-0">
+        <ImgPlaceholder label="Industries Served — Grain Mandi, Mining, Manufacturing, Logistics, Retail" icon={Factory} height="100%" className="h-full" />
+      </div>
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-[#1E3A5F]/70 pointer-events-none" />
+      {/* Red left accent */}
+      <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626] z-10" aria-hidden="true" />
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-20 md:pt-24 md:pb-28">
-        <nav className="flex items-center gap-2 text-xs text-gray-400 mb-7">
-          <Link href="/" className="hover:text-[#111827] transition-colors">Home</Link><span>/</span>
-          <span className="text-[#111827] font-medium">Industries</span>
+        <nav className="flex items-center gap-2 text-xs text-white/50 mb-7">
+          <Link href="/" className="hover:text-white transition-colors">Home</Link><span>/</span>
+          <span className="text-white/90 font-medium">Industries</span>
         </nav>
         <div className="max-w-2xl">
           <div className="flex flex-wrap gap-2 mb-5">
             <span className="inline-flex items-center gap-1.5 text-[0.6rem] font-bold uppercase tracking-widest text-[#1E3A5F] bg-blue-50 border border-blue-100 px-2.5 py-1 rounded-full">8 Industries</span>
             <span className="inline-flex items-center gap-1.5 text-[0.6rem] font-bold uppercase tracking-widest text-gray-600 bg-gray-50 border border-gray-200 px-2.5 py-1 rounded-full">Pan-India Service</span>
           </div>
-          <h1 className="text-[#111827] font-bold leading-[1.07] tracking-tight mb-5" style={{ fontSize: "clamp(2rem, 4.5vw, 3.2rem)" }}>
+          <h1 className="text-white font-bold leading-[1.07] tracking-tight mb-5" style={{ fontSize: "clamp(2rem, 4.5vw, 3.2rem)" }}>
             Industries We Serve
           </h1>
-          <p className="text-gray-500 text-lg leading-relaxed">
+          <p className="text-white/75 text-lg leading-relaxed">
             From grain mandis to mining companies. From jewellery shops to government toll plazas.
             Rite-Way weighing solutions power every industry across North India.
           </p>
@@ -164,18 +215,8 @@ function IndustryCards() {
               className="bg-white border border-gray-100 rounded-sm overflow-hidden flex flex-col hover:shadow-lg transition-all duration-200 group"
               style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
 
-              {/* Header gradient */}
-              <div className="h-32 relative overflow-hidden flex items-end"
-                style={{ background: `linear-gradient(135deg, ${gradientFrom} 0%, ${gradientTo} 100%)` }}>
-                <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(to right,rgba(255,255,255,0.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.07) 1px,transparent 1px)", backgroundSize: "18px 18px" }} />
-                <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                  <Icon size={60} className="text-white" />
-                </div>
-                <div className="relative px-4 pb-3 z-10">
-                  <p className="text-white/50 text-[0.55rem] font-bold uppercase tracking-widest mb-0.5">{tagline}</p>
-                  <p className="text-white font-bold text-sm">{name}</p>
-                </div>
-              </div>
+              {/* Photo: {name} industry environment */}
+              <ImgPlaceholder label={name} icon={Icon} badge="Photo Coming Soon" aspect="16/9" className="" />
 
               {/* Content */}
               <div className="p-5 flex flex-col flex-1">
