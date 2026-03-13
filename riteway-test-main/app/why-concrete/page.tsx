@@ -153,7 +153,7 @@ function Hero() {
           src="/images/products/weighbridges/rcc-concrete-platform.jpeg"
           alt="RCC Concrete Platform Weighbridge — Real Installation"
           className="w-full h-full object-cover"
-        />
+        />className
       </div>
       {/* Dark overlay for text readability */}
       <div className="absolute inset-0 bg-[#1E3A5F]/70 pointer-events-none" />
