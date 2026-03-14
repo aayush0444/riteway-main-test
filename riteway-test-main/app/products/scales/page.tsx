@@ -10,56 +10,8 @@ import {
   ShoppingCart,
   Warehouse,
   Anchor,
-  User,
-  Battery,
-  Monitor,
-  Cpu,
   ChevronRight,
-  LayoutGrid,
-  Calculator,
 } from "lucide-react";
-
-// ─── Reusable image placeholder ───────────────────────────────────────────────
-// Replace with next/image when real photos available. aspect-ratio keeps layout stable.
-function ImgPlaceholder({
-  label,
-  icon: Icon,
-  badge = "Photo Coming Soon",
-  aspect = "16/9",
-  height,
-  className = "",
-}: {
-  label: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
-  badge?: string;
-  aspect?: string;
-  height?: string;
-  className?: string;
-}) {
-  return (
-    <div
-      className={"w-full relative overflow-hidden " + className}
-      style={{
-        background: "#1E3A5F",
-        aspectRatio: height ? undefined : aspect,
-        height: height,
-      }}
-    >
-      {/* Dot-grid pattern */}
-      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-      {/* Vignette */}
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
-      {/* Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
-        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
-          <Icon size={28} className="text-white/70" />
-        </div>
-        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
-        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
-      </div>
-    </div>
-  );
-}
 
 
 // ─── Shared ───────────────────────────────────────────────────────────────────
@@ -148,18 +100,6 @@ const SCALE_CATEGORIES = [
     features: ["Large LED display", "IR remote (20m range)", "Weight accumulation", "Wireless option available"],
     industries: ["Industrial", "Crane", "Lifting"],
   },
-  {
-    icon: User,
-    name: "Personal Scale",
-    slug: "personal",
-    capacity: "180kg",
-    badge: "bg-sky-50 text-sky-700 border-sky-100",
-    gradientFrom: "#0c4a6e",
-    gradientTo: "#075985",
-    description: "180kg capacity personal weighing scale with toughened glass platform. 100g graduation. Clean digital display for homes and clinics.",
-    features: ["180kg capacity", "100g graduation", "Glass platform", "Slim profile design"],
-    industries: ["Home", "Clinic", "Gym"],
-  },
 ];
 
 // ─── Finder Logic ─────────────────────────────────────────────────────────────
@@ -173,7 +113,7 @@ function getRecommendation(industry: string, capacity: string): Rec {
   if (!industry || !capacity) return null;
 
   if (industry === "Jewellery") return { name: "Jewel Precision Scale", slug: "jewel", reason: "Milligram accuracy with tola and carat conversion — purpose-built for jewellers." };
-  if (industry === "Home / Clinic") return { name: "Personal Scale", slug: "personal", reason: "180kg capacity, glass platform, clean display — ideal for homes and clinics." };
+  if (industry === "Home / Clinic") return { name: "Table Top Scale", slug: "table-top", reason: "Compact, accurate counter scale — suitable for light home and clinic use up to 30kg." };
 
   if (capacity === "Under 30 kg") {
     if (industry === "Mandi / Agriculture") return { name: "Price Computing Scale", slug: "price-computing", reason: "Shows weight, rate, and total simultaneously — designed for mandi operations." };
@@ -194,11 +134,15 @@ function getRecommendation(industry: string, capacity: string): Rec {
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-gray-100">
-      {/* Photo: Weighing scales product range — hero background */}
+      {/* Hero photo — table top scale */}
       <div className="absolute inset-0">
-        <ImgPlaceholder label="Rite-Way Weighing Scales — Complete Range, 20g to 2000kg" icon={Scale} height="100%" className="h-full" />
+        <img
+          src="/images/products/scales/table-top.png"
+          alt="Rite-Way weighing scales — complete range from 20g to 2000kg"
+          className="w-full h-full object-cover"
+        />
       </div>
-      {/* Dark overlay for text readability */}
+      {/* Dark overlay */}
       <div className="absolute inset-0 bg-[#1E3A5F]/70 pointer-events-none" />
       {/* Red left accent */}
       <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626] z-10" aria-hidden="true" />
@@ -216,7 +160,7 @@ function Hero() {
               <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />ISO 9001:2015
             </span>
             <span className="inline-flex items-center gap-1.5 text-[0.6rem] font-bold uppercase tracking-widest text-[#1E3A5F] bg-blue-50 border border-blue-100 px-2.5 py-1 rounded-full">
-              6 Scale Categories
+              5 Scale Categories
             </span>
             <span className="inline-flex items-center gap-1.5 text-[0.6rem] font-bold uppercase tracking-widest text-gray-600 bg-gray-50 border border-gray-200 px-2.5 py-1 rounded-full">
               🇮🇳 Made in India
@@ -278,7 +222,7 @@ function ScaleCategoriesGrid() {
         <div className="max-w-xl mb-12">
           <SectionLabel>Complete Range</SectionLabel>
           <h2 className="text-[#111827] font-bold text-3xl md:text-4xl leading-tight tracking-tight mb-3">
-            6 Scale Categories
+            5 Scale Categories
           </h2>
           <p className="text-gray-500 text-base leading-relaxed">
             Every weighing need covered — from sub-gram precision to
@@ -466,69 +410,7 @@ function ScaleFinder() {
   );
 }
 
-// ─── 4. Accessories ───────────────────────────────────────────────────────────
-
-function Accessories() {
-  const items = [
-    {
-      icon: Battery,
-      name: "Batteries",
-      desc: "Sealed lead acid batteries in various capacities for uninterrupted weighbridge and scale operation.",
-      color: "#1E3A5F",
-    },
-    {
-      icon: Monitor,
-      name: "Intelligent Terminal",
-      desc: "Alfa Numeric Digitizer — large LED remote display for weighbridge indicators visible from a distance.",
-      color: "#374151",
-    },
-    {
-      icon: Cpu,
-      name: "Junction Box & Load Cells",
-      desc: "4-channel load cell summing junction boxes and precision load cells in various capacities.",
-      color: "#DC2626",
-    },
-  ];
-
-  return (
-    <section className="bg-gray-50 py-20 md:py-24 border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
-          <div>
-            <SectionLabel>Spares & Add-Ons</SectionLabel>
-            <h2 className="text-[#111827] font-bold text-3xl md:text-4xl leading-tight tracking-tight">
-              Accessories
-            </h2>
-          </div>
-          <Link href="/products/load-cells"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1E3A5F] hover:text-[#DC2626] transition-colors group flex-shrink-0">
-            View all accessories <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-          {items.map(({ icon: Icon, name, desc, color }) => (
-            <Link key={name} href="/products/load-cells"
-              className="bg-white border border-gray-100 rounded-sm p-6 hover:shadow-md transition-all group"
-              style={{ boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
-              <div className="w-10 h-10 rounded-sm flex items-center justify-center mb-4 group-hover:scale-105 transition-transform"
-                style={{ backgroundColor: color }}>
-                <Icon size={17} className="text-white" />
-              </div>
-              <h3 className="text-[#111827] font-bold text-sm mb-2 group-hover:text-[#DC2626] transition-colors">{name}</h3>
-              <p className="text-gray-500 text-xs leading-relaxed">{desc}</p>
-              <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-[#1E3A5F] group-hover:text-[#DC2626] transition-colors">
-                View details <ArrowRight size={11} className="group-hover:translate-x-0.5 transition-transform" />
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── 5. CTA Banner ────────────────────────────────────────────────────────────
+// ─── 4. CTA Banner ────────────────────────────────────────────────────────────
 
 function CTABanner() {
   const waHref = `${WA_BASE}${encodeURIComponent("Hello Rite-Way, I am looking for a weighing scale. Please help me choose the right model.")}`;
@@ -578,7 +460,6 @@ export default function ScalesIndexPage() {
       <Hero />
       <ScaleCategoriesGrid />
       <ScaleFinder />
-      <Accessories />
       <CTABanner />
     </>
   );

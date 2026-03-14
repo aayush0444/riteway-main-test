@@ -12,51 +12,7 @@ import {
   FlaskConical,
   Cpu,
   Package,
-  Shield,
-  Camera,
 } from "lucide-react";
-
-// ─── Reusable image placeholder ───────────────────────────────────────────────
-// Replace with next/image when real photos available. aspect-ratio keeps layout stable.
-function ImgPlaceholder({
-  label,
-  icon: Icon,
-  badge = "Photo Coming Soon",
-  aspect = "16/9",
-  height,
-  className = "",
-}: {
-  label: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
-  badge?: string;
-  aspect?: string;
-  height?: string;
-  className?: string;
-}) {
-  return (
-    <div
-      className={"w-full relative overflow-hidden " + className}
-      style={{
-        background: "#1E3A5F",
-        aspectRatio: height ? undefined : aspect,
-        height: height,
-      }}
-    >
-      {/* Dot-grid pattern */}
-      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-      {/* Vignette */}
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
-      {/* Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
-        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
-          <Icon size={28} className="text-white/70" />
-        </div>
-        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
-        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
-      </div>
-    </div>
-  );
-}
 
 
 const WA_HREF = "https://wa.me/919877541199?text=" + encodeURIComponent("Hello Rite-Way, I need information about your certifications and compliance documents. Please advise.");
@@ -161,20 +117,6 @@ function PrimaryCertification() {
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── 3. Compliance Cards ──────────────────────────────────────────────────────
-
-function ISOCertPhoto() {
-  return (
-    <section className="bg-white py-10 border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        {/* Photo placeholder: ISO 9001:2015 Certificate — Minebea Technologies */}
-        <ImgPlaceholder label="ISO 9001:2015 Certificate — Minebea Technologies (Rite-Way)" icon={Shield} aspect="4/3" className="rounded-sm max-w-md mx-auto" />
-        <p className="text-xs text-gray-400 mt-2 text-center">ISO 9001:2015 Quality Management Certificate — Minebea Technologies</p>
       </div>
     </section>
   );
@@ -401,7 +343,6 @@ export default function CertificationsPage() {
     <>
       <Hero />
       <PrimaryCertification />
-      <ISOCertPhoto />
       <ComplianceSection />
       <QualityTimeline />
       <MeansForYou />
