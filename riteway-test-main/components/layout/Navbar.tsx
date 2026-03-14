@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Phone, ChevronDown, Menu, X, ArrowRight, Wrench } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Phone, ChevronDown, Menu, X, ArrowRight, Wrench, Award, Image, Info } from "lucide-react";
 
 function WAIcon() {
   return (
@@ -14,36 +15,61 @@ function WAIcon() {
   );
 }
 
-// ─── Dropdown data ─────────────────────────────────────────────────────────
+// ─── Dropdown data ────────────────────────────────────────────────────────────
 
 const WEIGHBRIDGE_LINKS = [
-  { label: "All Weighbridges",               href: "/products/weighbridges",                       highlight: true },
-  { label: "Concrete Platform",              href: "/products/weighbridges/concrete-platform",     highlight: false },
-  { label: "Steel Platform",                 href: "/products/weighbridges/steel-platform",        highlight: false },
-  { label: "IIT 4500 Standard Terminal",     href: "/products/weighbridges/and4500-email",         highlight: false },
-  { label: "IIT 4500 Dual Platform",         href: "/products/weighbridges/and4500-dual",          highlight: false },
-  { label: "IIT 4500 with GLCD Display",     href: "/products/weighbridges/iit4500-glcd",          highlight: false },
-  { label: "IIT 4500 with TFT Display",      href: "/products/weighbridges/iit4500-tft",           highlight: false },
-
+  { label: "All Weighbridges",             href: "/products/weighbridges",                   highlight: true },
+  { label: "Concrete Platform",            href: "/products/weighbridges/concrete-platform", highlight: false },
+  { label: "Steel Platform",               href: "/products/weighbridges/steel-platform",    highlight: false },
+  { label: "IIT 4500 Standard Terminal",   href: "/products/weighbridges/and4500-email",     highlight: false },
+  { label: "IIT 4500 Dual Platform",       href: "/products/weighbridges/and4500-dual",      highlight: false },
+  { label: "IIT 4500 with GLCD Display",   href: "/products/weighbridges/iit4500-glcd",      highlight: false },
+  { label: "IIT 4500 with TFT Display",    href: "/products/weighbridges/iit4500-tft",       highlight: false },
+  { label: "Payload-T GPRS System",        href: "/products/weighbridges/payload-gprs",      highlight: false },
 ];
 
 const SCALE_LINKS = [
-  { label: "All Scales",                href: "/products/scales",                             highlight: true },
-  { label: "Table Top Scales",          href: "/products/scales/table-top",                   highlight: false },
-  { label: "Platform & Floor Scales",   href: "/products/scales/platform",                    highlight: false },
-  { label: "Price Computing Scale",     href: "/products/scales/price-computing",             highlight: false },
-  { label: "Jewel & Precision Scale",   href: "/products/scales/jewel",                       highlight: false },
-  { label: "Crane & Hanging Scale",     href: "/products/scales/crane",                       highlight: false },
- 
+  { label: "All Scales",                href: "/products/scales",                         highlight: true },
+  { label: "Table Top Scales",          href: "/products/scales/table-top",               highlight: false },
+  { label: "Platform & Floor Scales",   href: "/products/scales/platform",                highlight: false },
+  { label: "Price Computing Scale",     href: "/products/scales/price-computing",         highlight: false },
+  { label: "Jewel & Precision Scale",   href: "/products/scales/jewel",                   highlight: false },
+  { label: "Crane & Hanging Scale",     href: "/products/scales/crane",                   highlight: false },
+];
+
+// About dropdown — Installations + Certifications live here
+const ABOUT_LINKS = [
+  {
+    label: "About Us",
+    href: "/about",
+    desc: "Our story, team & values",
+    icon: Info,
+  },
+  {
+    label: "Installations",
+    href: "/installations",
+    desc: "500+ projects across North India",
+    icon: Image,
+  },
+  {
+    label: "Certifications",
+    href: "/certifications",
+    desc: "ISO 9001:2015 & Legal Metrology",
+    icon: Award,
+  },
 ];
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function Navbar() {
-  const [scrolled,       setScrolled]       = useState(false);
-  const [productsOpen,   setProductsOpen]   = useState(false);
-  const [mobileOpen,     setMobileOpen]     = useState(false);
-  const [mobileProd,     setMobileProd]     = useState(false);
+  const pathname = usePathname();
+
+  const [scrolled,     setScrolled]     = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
+  const [aboutOpen,    setAboutOpen]    = useState(false);
+  const [mobileOpen,   setMobileOpen]   = useState(false);
+  const [mobileProd,   setMobileProd]   = useState(false);
+  const [mobileAbout,  setMobileAbout]  = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -53,18 +79,41 @@ export default function Navbar() {
 
   const closeAll = () => {
     setProductsOpen(false);
+    setAboutOpen(false);
     setMobileOpen(false);
     setMobileProd(false);
+    setMobileAbout(false);
+  };
+
+  // Active link helper — highlights the nav item whose path matches current page
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  const navLinkClass = (href: string) =>
+    `px-3 py-5 text-sm font-medium transition-colors ${
+      isActive(href)
+        ? "text-[#DC2626] font-semibold"
+        : "text-[#111827] hover:text-[#DC2626]"
+    }`;
+
+  const dropdownBtnClass = (open: boolean, relatedPaths: string[]) => {
+    const active = relatedPaths.some((p) => pathname.startsWith(p));
+    return `flex items-center gap-1.5 px-3 py-5 text-sm font-medium transition-colors ${
+      open || active ? "text-[#DC2626] font-semibold" : "text-[#111827] hover:text-[#DC2626]"
+    }`;
   };
 
   return (
     <>
       {/* ═══════════════════════════ HEADER ═══════════════════════════ */}
-      <header className={`fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 transition-shadow duration-200 ${scrolled ? "shadow-md" : ""}`}>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 transition-shadow duration-200 ${
+          scrolled ? "shadow-md" : ""
+        }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
           <div className="flex items-center justify-between h-16">
 
-            {/* ── Logo ─────────────────────────────── */}
+            {/* ── Logo ───────────────────────────────── */}
             <Link href="/" onClick={closeAll} className="flex flex-col leading-none flex-shrink-0 group">
               <span
                 className="font-bold tracking-tight text-[#DC2626] group-hover:text-red-700 transition-colors"
@@ -81,16 +130,16 @@ export default function Navbar() {
               </span>
             </Link>
 
-            {/* ── Desktop Navigation ───────────────── */}
-            <nav className="hidden lg:flex items-center gap-1 text-sm font-medium">
+            {/* ── Desktop Navigation ─────────────────── */}
+            {/* 5 items: Products ▾ | Repair & Service | Industries | About ▾ | Contact */}
+            <nav className="hidden lg:flex items-center gap-0 text-sm font-medium">
 
-              {/* Products mega-dropdown */}
+              {/* 1. Products mega-dropdown */}
               <div
                 className="relative"
-                onMouseEnter={() => setProductsOpen(true)}
+                onMouseEnter={() => { setProductsOpen(true); setAboutOpen(false); }}
                 onMouseLeave={() => setProductsOpen(false)}>
-                <button
-                  className={`flex items-center gap-1.5 px-3 py-5 transition-colors ${productsOpen ? "text-[#DC2626]" : "text-[#111827] hover:text-[#DC2626]"}`}>
+                <button className={dropdownBtnClass(productsOpen, ["/products"])}>
                   Products
                   <ChevronDown
                     size={13}
@@ -98,7 +147,7 @@ export default function Navbar() {
                 </button>
 
                 {productsOpen && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 z-50 w-[580px] pt-0">
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 z-50 w-[620px] pt-0">
                     <div className="bg-white border border-gray-100 rounded-sm shadow-2xl overflow-hidden">
                       <div className="h-[3px] bg-[#1E3A5F]" />
                       <div className="grid grid-cols-2 p-5 gap-0">
@@ -114,7 +163,9 @@ export default function Navbar() {
                               href={href}
                               onClick={closeAll}
                               className={`block px-2 py-2 text-sm rounded-sm transition-colors ${
-                                highlight
+                                isActive(href) && !highlight
+                                  ? "bg-red-50 text-[#DC2626] font-semibold"
+                                  : highlight
                                   ? "font-semibold text-[#DC2626] hover:bg-red-50"
                                   : "text-gray-600 hover:text-[#111827] hover:bg-gray-50"
                               }`}>
@@ -123,7 +174,7 @@ export default function Navbar() {
                           ))}
                         </div>
 
-                        {/* Scales column */}
+                        {/* Scales + Why Concrete column */}
                         <div className="pl-5">
                           <p className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 mb-3 px-2">
                             Scales &amp; More
@@ -134,20 +185,40 @@ export default function Navbar() {
                               href={href}
                               onClick={closeAll}
                               className={`block px-2 py-2 text-sm rounded-sm transition-colors ${
-                                highlight
+                                isActive(href) && !highlight
+                                  ? "bg-red-50 text-[#DC2626] font-semibold"
+                                  : highlight
                                   ? "font-semibold text-[#DC2626] hover:bg-red-50"
                                   : "text-gray-600 hover:text-[#111827] hover:bg-gray-50"
                               }`}>
                               {label}
                             </Link>
                           ))}
+
+                          {/* Why Concrete — moved here from top nav */}
+                          <div className="mt-3 pt-3 border-t border-gray-100">
+                            <p className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 mb-2 px-2">
+                              Buying Guide
+                            </p>
+                            <Link
+                              href="/why-concrete"
+                              onClick={closeAll}
+                              className={`block px-2 py-2 text-sm rounded-sm transition-colors ${
+                                isActive("/why-concrete")
+                                  ? "bg-red-50 text-[#DC2626] font-semibold"
+                                  : "text-gray-600 hover:text-[#111827] hover:bg-gray-50"
+                              }`}>
+                              Why Concrete Platform?
+                            </Link>
+                          </div>
                         </div>
                       </div>
 
                       {/* Dropdown footer strip */}
                       <div className="bg-gray-50 border-t border-gray-100 px-5 py-2.5 flex items-center gap-5 text-xs text-gray-400">
                         <span className="flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />ISO 9001:2015
+                          <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
+                          ISO 9001:2015
                         </span>
                         <span>Since 2004</span>
                         <span>Mohali, Punjab</span>
@@ -165,29 +236,75 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* Repair & Service */}
+              {/* 2. Repair & Service */}
               <Link
                 href="/repair"
-                className="flex items-center gap-1.5 px-3 py-5 text-[#111827] hover:text-[#DC2626] transition-colors">
+                onClick={closeAll}
+                className={`flex items-center gap-1.5 ${navLinkClass("/repair")}`}>
                 <Wrench size={13} />
                 Repair &amp; Service
               </Link>
 
-              <Link href="/why-concrete" className="px-3 py-5 text-[#111827] hover:text-[#DC2626] transition-colors">
-                Why Concrete
-              </Link>
-              <Link href="/industries"   className="px-3 py-5 text-[#111827] hover:text-[#DC2626] transition-colors">
+              {/* 3. Industries */}
+              <Link href="/industries" onClick={closeAll} className={navLinkClass("/industries")}>
                 Industries
               </Link>
-              <Link href="/about"        className="px-3 py-5 text-[#111827] hover:text-[#DC2626] transition-colors">
-                About
-              </Link>
-              <Link href="/contact"      className="px-3 py-5 text-[#111827] hover:text-[#DC2626] transition-colors">
+
+              {/* 4. About dropdown — About Us + Installations + Certifications */}
+              <div
+                className="relative"
+                onMouseEnter={() => { setAboutOpen(true); setProductsOpen(false); }}
+                onMouseLeave={() => setAboutOpen(false)}>
+                <button className={dropdownBtnClass(aboutOpen, ["/about", "/installations", "/certifications"])}>
+                  About
+                  <ChevronDown
+                    size={13}
+                    className={`transition-transform duration-150 ${aboutOpen ? "rotate-180" : ""}`} />
+                </button>
+
+                {aboutOpen && (
+                  <div className="absolute top-full right-0 z-50 w-72 pt-0">
+                    <div className="bg-white border border-gray-100 rounded-sm shadow-2xl overflow-hidden">
+                      <div className="h-[3px] bg-[#1E3A5F]" />
+                      <div className="p-3">
+                        {ABOUT_LINKS.map(({ label, href, desc, icon: Icon }) => (
+                          <Link
+                            key={href}
+                            href={href}
+                            onClick={closeAll}
+                            className={`flex items-start gap-3 px-3 py-3 rounded-sm transition-colors group/item ${
+                              isActive(href)
+                                ? "bg-red-50"
+                                : "hover:bg-gray-50"
+                            }`}>
+                            <div className={`w-8 h-8 rounded-sm flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors ${
+                              isActive(href) ? "bg-[#DC2626]" : "bg-[#1E3A5F] group-hover/item:bg-[#DC2626]"
+                            }`}>
+                              <Icon size={14} className="text-white" />
+                            </div>
+                            <div>
+                              <p className={`text-sm font-semibold leading-snug ${
+                                isActive(href) ? "text-[#DC2626]" : "text-[#111827]"
+                              }`}>
+                                {label}
+                              </p>
+                              <p className="text-xs text-gray-400 mt-0.5">{desc}</p>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* 5. Contact */}
+              <Link href="/contact" onClick={closeAll} className={navLinkClass("/contact")}>
                 Contact
               </Link>
             </nav>
 
-            {/* ── Desktop CTAs ─────────────────────── */}
+            {/* ── Desktop CTAs ──────────────────────── */}
             <div className="hidden lg:flex items-center gap-3">
               <a
                 href="tel:+919877541199"
@@ -210,7 +327,7 @@ export default function Navbar() {
               </a>
             </div>
 
-            {/* ── Mobile hamburger ─────────────────── */}
+            {/* ── Mobile hamburger ──────────────────── */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="lg:hidden p-2 -mr-1 text-[#111827] hover:text-[#DC2626] transition-colors"
@@ -265,7 +382,6 @@ export default function Navbar() {
 
               {mobileProd && (
                 <div className="ml-2 mb-1">
-                  {/* Weighbridges sub-section */}
                   <p className="text-[0.58rem] font-bold uppercase tracking-widest text-gray-400 px-3 pt-3 pb-1.5">
                     Weighbridges
                   </p>
@@ -274,12 +390,15 @@ export default function Navbar() {
                       key={href}
                       href={href}
                       onClick={closeAll}
-                      className="block px-3 py-2 rounded-sm text-xs text-gray-600 hover:text-[#DC2626] hover:bg-red-50 transition-colors">
+                      className={`block px-3 py-2 rounded-sm text-xs transition-colors ${
+                        isActive(href)
+                          ? "text-[#DC2626] font-semibold bg-red-50"
+                          : "text-gray-600 hover:text-[#DC2626] hover:bg-red-50"
+                      }`}>
                       {label}
                     </Link>
                   ))}
 
-                  {/* Scales sub-section */}
                   <p className="text-[0.58rem] font-bold uppercase tracking-widest text-gray-400 px-3 pt-3 pb-1.5">
                     Scales &amp; More
                   </p>
@@ -288,14 +407,32 @@ export default function Navbar() {
                       key={href}
                       href={href}
                       onClick={closeAll}
-                      className="block px-3 py-2 rounded-sm text-xs text-gray-600 hover:text-[#DC2626] hover:bg-red-50 transition-colors">
+                      className={`block px-3 py-2 rounded-sm text-xs transition-colors ${
+                        isActive(href)
+                          ? "text-[#DC2626] font-semibold bg-red-50"
+                          : "text-gray-600 hover:text-[#DC2626] hover:bg-red-50"
+                      }`}>
                       {label}
                     </Link>
                   ))}
+
+                  <p className="text-[0.58rem] font-bold uppercase tracking-widest text-gray-400 px-3 pt-3 pb-1.5">
+                    Buying Guide
+                  </p>
+                  <Link
+                    href="/why-concrete"
+                    onClick={closeAll}
+                    className={`block px-3 py-2 rounded-sm text-xs transition-colors ${
+                      isActive("/why-concrete")
+                        ? "text-[#DC2626] font-semibold bg-red-50"
+                        : "text-gray-600 hover:text-[#DC2626] hover:bg-red-50"
+                    }`}>
+                    Why Concrete Platform?
+                  </Link>
                 </div>
               )}
 
-              {/* Services section */}
+              {/* Services */}
               <div className="mt-1">
                 <p className="text-[0.58rem] font-bold uppercase tracking-widest text-gray-400 px-3 pt-3 pb-1.5">
                   Services
@@ -303,7 +440,9 @@ export default function Navbar() {
                 <Link
                   href="/repair"
                   onClick={closeAll}
-                  className="flex items-center gap-2 px-3 py-3 rounded-sm text-sm font-semibold text-[#DC2626] hover:bg-red-50 transition-colors">
+                  className={`flex items-center gap-2 px-3 py-3 rounded-sm text-sm font-semibold transition-colors ${
+                    isActive("/repair") ? "text-[#DC2626] bg-red-50" : "text-[#DC2626] hover:bg-red-50"
+                  }`}>
                   <Wrench size={13} />
                   Repair &amp; Service
                 </Link>
@@ -312,21 +451,49 @@ export default function Navbar() {
               {/* Main links */}
               <div className="mt-1 border-t border-gray-100 pt-2">
                 {[
-                  { label: "Why Concrete",  href: "/why-concrete" },
                   { label: "Industries",    href: "/industries" },
-                  { label: "Installations", href: "/installations" },
-                  { label: "Certifications",href: "/certifications" },
-                  { label: "About Us",      href: "/about" },
                   { label: "Contact",       href: "/contact" },
                 ].map(({ label, href }) => (
                   <Link
                     key={href}
                     href={href}
                     onClick={closeAll}
-                    className="block px-3 py-3 rounded-sm text-sm font-medium text-[#111827] hover:bg-gray-50 hover:text-[#DC2626] transition-colors">
+                    className={`block px-3 py-3 rounded-sm text-sm font-medium transition-colors ${
+                      isActive(href)
+                        ? "text-[#DC2626] font-semibold bg-red-50"
+                        : "text-[#111827] hover:bg-gray-50 hover:text-[#DC2626]"
+                    }`}>
                     {label}
                   </Link>
                 ))}
+              </div>
+
+              {/* About accordion */}
+              <div className="mt-1 border-t border-gray-100 pt-2">
+                <button
+                  onClick={() => setMobileAbout(!mobileAbout)}
+                  className="w-full flex items-center justify-between px-3 py-3 rounded-sm text-[#111827] font-semibold text-sm hover:bg-gray-50 transition-colors">
+                  About
+                  <ChevronDown size={14} className={`text-gray-400 transition-transform ${mobileAbout ? "rotate-180" : ""}`} />
+                </button>
+                {mobileAbout && (
+                  <div className="ml-2 mb-1">
+                    {ABOUT_LINKS.map(({ label, href, desc }) => (
+                      <Link
+                        key={href}
+                        href={href}
+                        onClick={closeAll}
+                        className={`block px-3 py-2.5 rounded-sm transition-colors ${
+                          isActive(href)
+                            ? "text-[#DC2626] font-semibold bg-red-50"
+                            : "hover:bg-gray-50"
+                        }`}>
+                        <p className="text-sm font-medium text-[#111827]">{label}</p>
+                        <p className="text-xs text-gray-400 mt-0.5">{desc}</p>
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
             </nav>
 
