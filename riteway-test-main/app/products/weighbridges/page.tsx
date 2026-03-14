@@ -9,6 +9,7 @@ import {
   Wrench,
   BarChart3,
   Mail,
+  Monitor,
   Wifi,
 } from "lucide-react";
 
@@ -131,34 +132,49 @@ const PLATFORM_CARDS = [
   },
 ];
 
+// ─── FIXED: AND 4500 renamed to IIT 4500 everywhere; GLCD + TFT variants added ─
+
 const TERMINAL_CARDS = [
   {
     icon: BarChart3,
-    title: "AND 4500 Dual Terminal",
+    title: "IIT 4500 Dual Terminal",
     href: "/products/weighbridges/and4500-dual",
     desc: "Control two weighbridges simultaneously with a single indicator and one operator room. 32-bit ARM processor, 1 lakh record memory, USB export, SMS facility, and built-in Mandi application.",
     highlights: ["Controls 2 weighbridges", "100,000 record memory", "Mandi app built-in", "SMS + USB export"],
   },
   {
     icon: Mail,
-    title: "AND 4500 Email Terminal",
+    title: "IIT 4500 Standard Terminal",
     href: "/products/weighbridges/and4500-email",
     desc: "Automatically emails Excel weighment reports to up to 5 email IDs via integrated GSM modem. No LAN or internet at the weighbridge site required. Pre-printed stationery support.",
     highlights: ["Auto Excel email reports", "Up to 5 email recipients", "GSM modem built-in", "No internet at site needed"],
   },
- 
+  {
+    icon: Monitor,
+    title: "IIT 4500 with GLCD Display",
+    href: "/products/weighbridges/iit4500-glcd",
+    desc: "IIT 4500 terminal with Graphical LCD upgrade — larger weight characters, full weighment ticket visible on screen in one view, and 11 Indian language headers for local language ticket printing.",
+    highlights: ["Large weight characters", "Full ticket view on screen", "11 Indian language headers", "All IIT 4500 features retained"],
+  },
+  {
+    icon: Monitor,
+    title: "IIT 4500 with TFT Display",
+    href: "/products/weighbridges/iit4500-tft",
+    desc: "IIT 4500 terminal with 7-inch full-colour TFT touchscreen. High-visibility display with touch operation, live vehicle images, and complete weighment management on a single screen.",
+    highlights: ["7\" full-colour TFT screen", "Touch operation", "Live vehicle image capture", "All IIT 4500 features retained"],
+  },
 ];
 
 const SIZES = [
-  { size: "5 × 3 m",  capacity: "40T",  note: "" },
-  { size: "7.5 × 3 m", capacity: "60T", note: "" },
-  { size: "9 × 3 m",  capacity: "80T",  note: "" },
-  { size: "12 × 3 m", capacity: "80T",  note: "" },
-  { size: "14 × 3 m", capacity: "100T", note: "" },
-  { size: "15 × 3 m", capacity: "100T", note: "" },
-  { size: "16 × 3 m", capacity: "100T", note: "" },
-  { size: "18 × 3 m", capacity: "150T", note: "" },
-  { size: "24 × 3 m", capacity: "200T", note: "Largest standard size" },
+  { size: "5 × 3 m",   capacity: "40T",  note: "" },
+  { size: "7.5 × 3 m", capacity: "60T",  note: "" },
+  { size: "9 × 3 m",   capacity: "80T",  note: "" },
+  { size: "12 × 3 m",  capacity: "80T",  note: "" },
+  { size: "14 × 3 m",  capacity: "100T", note: "" },
+  { size: "15 × 3 m",  capacity: "100T", note: "" },
+  { size: "16 × 3 m",  capacity: "100T", note: "" },
+  { size: "18 × 3 m",  capacity: "150T", note: "" },
+  { size: "24 × 3 m",  capacity: "200T", note: "Largest standard size" },
 ];
 
 // ─── 1. Hero ──────────────────────────────────────────────────────────────────
@@ -166,7 +182,6 @@ const SIZES = [
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-gray-100">
-      {/* Hero photo */}
       <div className="absolute inset-0">
         <img
           src="/images/products/weighbridges/pit-concrete-weighbridge.jpeg"
@@ -174,13 +189,10 @@ function Hero() {
           className="w-full h-full object-cover"
         />
       </div>
-      {/* Dark overlay for text readability */}
       <div className="absolute inset-0 bg-[#1E3A5F]/70 pointer-events-none" />
-      {/* Red left accent */}
       <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626] z-10" aria-hidden="true" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-20 md:pt-20 md:pb-24">
-        {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs text-white/50 mb-6">
           <Link href="/" className="hover:text-white transition-colors">Home</Link>
           <span>/</span>
@@ -263,7 +275,6 @@ function ProductCards() {
               className="border border-gray-100 rounded-sm overflow-hidden hover:shadow-lg transition-all duration-200 group bg-white flex flex-col"
               style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}
             >
-              {/* Product photo */}
               <img
                 src={CARD_PHOTOS[card.id]}
                 alt={`Rite-Way ${card.title} — ${card.subtitle}`}
@@ -272,7 +283,6 @@ function ProductCards() {
               />
 
               <div className="p-6 flex flex-col flex-1">
-                {/* Badge + tag */}
                 <div className="flex items-center gap-2 mb-3">
                   {card.badge && (
                     <span className={`text-[0.6rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border ${card.badgeColor}`}>
@@ -284,16 +294,12 @@ function ProductCards() {
                   </span>
                 </div>
 
-                {/* Title */}
                 <h3 className="text-[#111827] font-bold text-lg leading-snug mb-1">
                   {card.title}
                 </h3>
                 <p className="text-[#1E3A5F] font-semibold text-sm mb-3">{card.subtitle}</p>
-
-                {/* Desc */}
                 <p className="text-gray-500 text-sm leading-relaxed mb-4">{card.desc}</p>
 
-                {/* Specs */}
                 <ul className="space-y-1.5 mb-6">
                   {card.specs.map((s) => (
                     <li key={s} className="flex items-center gap-2 text-sm text-gray-600">
@@ -303,7 +309,6 @@ function ProductCards() {
                   ))}
                 </ul>
 
-                {/* Actions — pushed to bottom */}
                 <div className="mt-auto flex gap-3">
                   <Link
                     href={card.href}
@@ -422,24 +427,25 @@ function TerminalsSection() {
             Advanced Control &amp; Reporting
           </h2>
           <p className="text-gray-500 text-base leading-relaxed">
-            Every Rite-Way weighbridge can be paired with intelligent terminals
-            for dual-platform control, automated email reporting, or cloud-based
-            fleet monitoring.
+            Every Rite-Way weighbridge can be paired with intelligent IIT 4500 terminals
+            for dual-platform control, automated email reporting, enhanced display options,
+            or cloud-based fleet monitoring.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* CHANGED: grid-cols-3 → grid-cols-2 lg:grid-cols-4 to fit all 4 terminal cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {TERMINAL_CARDS.map(({ icon: Icon, title, href, desc, highlights }) => (
             <div
               key={title}
-              className="border border-gray-100 rounded-sm p-7 hover:shadow-md transition-shadow duration-200 flex flex-col group"
+              className="border border-gray-100 rounded-sm p-6 hover:shadow-md transition-shadow duration-200 flex flex-col group"
               style={{ boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}
             >
               <div className="w-10 h-10 rounded-sm bg-[#1E3A5F] flex items-center justify-center mb-5 group-hover:bg-[#DC2626] transition-colors duration-200">
                 <Icon size={17} className="text-white" />
               </div>
-              <h3 className="text-[#111827] font-bold text-base mb-3 leading-snug">{title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed mb-5 flex-1">{desc}</p>
+              <h3 className="text-[#111827] font-bold text-sm mb-3 leading-snug">{title}</h3>
+              <p className="text-gray-500 text-xs leading-relaxed mb-5 flex-1">{desc}</p>
               <ul className="space-y-1.5 mb-6">
                 {highlights.map((h) => (
                   <li key={h} className="flex items-center gap-2 text-xs text-gray-600">
@@ -483,7 +489,6 @@ function SizeTable() {
           className="border border-gray-200 rounded-sm overflow-hidden max-w-3xl"
           style={{ boxShadow: "0 2px 20px rgba(0,0,0,0.05)" }}
         >
-          {/* Header */}
           <div className="grid grid-cols-4 bg-[#1E3A5F]">
             {["#", "Platform Size", "Capacity", "Installation"].map((h) => (
               <div key={h} className="px-5 py-3.5">
@@ -492,7 +497,6 @@ function SizeTable() {
             ))}
           </div>
 
-          {/* Rows */}
           {SIZES.map(({ size, capacity, note }, i) => (
             <div
               key={size}
@@ -521,7 +525,6 @@ function SizeTable() {
           ))}
         </div>
 
-        {/* Footnotes */}
         <div className="mt-5 flex flex-wrap gap-5 max-w-3xl">
           <div className="flex items-center gap-2 text-xs text-gray-500">
             <CheckCircle2 size={12} className="text-green-500" />

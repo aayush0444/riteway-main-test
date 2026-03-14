@@ -27,19 +27,20 @@ const QUICK_LINKS = [
   { label: "Get a Quote",         href: "/get-quote",       highlight: true },
 ];
 
+// ─── FIXED: All terminal names now consistently use IIT 4500 ─────────────────
 const PRODUCT_LINKS = [
-  { label: "Concrete Weighbridge",      href: "/products/weighbridges/concrete-platform" },
-  { label: "Steel Weighbridge",         href: "/products/weighbridges/steel-platform" },
-  { label: "IIT 4500 Standard Terminal",   href: "/products/weighbridges/and4500-email" },
-  { label: "IIT 4500 Dual Platform",       href: "/products/weighbridges/and4500-dual" },
-  { label: "IIT 4500 with GLCD Display",   href: "/products/weighbridges/iit4500-glcd" },
-  { label: "IIT 4500 with TFT Display",    href: "/products/weighbridges/iit4500-tft" },
-  { label: "Payload-T GPRS System",     href: "/products/weighbridges/payload-gprs" },
-  { label: "Table Top Scales",          href: "/products/scales/table-top" },
-  { label: "Platform & Floor Scales",   href: "/products/scales/platform" },
-  { label: "Price Computing Scale",     href: "/products/scales/price-computing" },
-  { label: "Jewel Precision Scale",     href: "/products/scales/jewel" },
-  { label: "Crane & Hanging Scale",     href: "/products/scales/crane" },
+  { label: "Concrete Weighbridge",        href: "/products/weighbridges/concrete-platform" },
+  { label: "Steel Weighbridge",           href: "/products/weighbridges/steel-platform" },
+  { label: "IIT 4500 Standard Terminal",  href: "/products/weighbridges/and4500-email" },
+  { label: "IIT 4500 Dual Platform",      href: "/products/weighbridges/and4500-dual" },
+  { label: "IIT 4500 with GLCD Display",  href: "/products/weighbridges/iit4500-glcd" },
+  { label: "IIT 4500 with TFT Display",   href: "/products/weighbridges/iit4500-tft" },
+  
+  { label: "Table Top Scales",            href: "/products/scales/table-top" },
+  { label: "Platform & Floor Scales",     href: "/products/scales/platform" },
+  { label: "Price Computing Scale",       href: "/products/scales/price-computing" },
+  { label: "Jewel Precision Scale",       href: "/products/scales/jewel" },
+  { label: "Crane & Hanging Scale",       href: "/products/scales/crane" },
 ];
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -209,10 +210,11 @@ export default function Footer() {
             © {new Date().getFullYear()} Minebea Technologies Pvt. Ltd. All rights reserved.
             RITE-WAY® is a registered trademark.
           </p>
+          {/* FIXED: Privacy Policy → /privacy-policy, Terms → /terms */}
           <div className="flex items-center gap-4 text-[0.62rem] text-gray-400 flex-wrap justify-center">
-            <Link href="/certifications" className="hover:text-[#111827] transition-colors">Certifications</Link>
-            <Link href="/contact"        className="hover:text-[#111827] transition-colors">Privacy Policy</Link>
-            <Link href="/contact"        className="hover:text-[#111827] transition-colors">Terms</Link>
+            <Link href="/certifications"  className="hover:text-[#111827] transition-colors">Certifications</Link>
+            <Link href="/privacy-policy"  className="hover:text-[#111827] transition-colors">Privacy Policy</Link>
+            <Link href="/terms"           className="hover:text-[#111827] transition-colors">Terms</Link>
             <span className="flex items-center gap-1">🇮🇳 Made in India</span>
           </div>
         </div>

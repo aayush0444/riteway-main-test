@@ -99,16 +99,7 @@ const WEIGHBRIDGES = [
     specs: ["7\" multi-colour TFT display", "24-bit Sigma-Delta A/D converter", "25 samples/second conversion speed", "Drives up to 12 load cells of 350Ω"],
     href: "/products/weighbridges/iit4500-tft",
   },
-  {
-    icon: Wifi,
-    name: "Payload-T GPRS System",
-    badge: "Fleet Monitoring",
-    popular: false,
-    accentColor: "#0369a1",
-    desc: "Real-time vehicle payload monitoring via GPRS. Cloud dashboard, overload alerts.",
-    specs: ["Live payload monitoring", "Cloud-based reporting dashboard", "Overload alerts", "For mining and fleet operators"],
-    href: "/products/weighbridges/payload-gprs",
-  },
+  
 ];
 
 const SCALES = [
