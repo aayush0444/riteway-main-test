@@ -17,12 +17,14 @@ function WAIcon() {
 // ─── Dropdown data ─────────────────────────────────────────────────────────
 
 const WEIGHBRIDGE_LINKS = [
-  { label: "All Weighbridges",          href: "/products/weighbridges",                       highlight: true },
-  { label: "Concrete Platform",         href: "/products/weighbridges/concrete-platform",     highlight: false },
-  { label: "Steel Platform",            href: "/products/weighbridges/steel-platform",        highlight: false },
-  { label: "AND 4500 Dual Terminal",    href: "/products/weighbridges/and4500-dual",          highlight: false },
-  { label: "AND 4500 Email Terminal",   href: "/products/weighbridges/and4500-email",         highlight: false },
-  { label: "Payload-T GPRS System",     href: "/products/weighbridges/payload-gprs",          highlight: false },
+  { label: "All Weighbridges",               href: "/products/weighbridges",                       highlight: true },
+  { label: "Concrete Platform",              href: "/products/weighbridges/concrete-platform",     highlight: false },
+  { label: "Steel Platform",                 href: "/products/weighbridges/steel-platform",        highlight: false },
+  { label: "IIT 4500 Standard Terminal",     href: "/products/weighbridges/and4500-email",         highlight: false },
+  { label: "IIT 4500 Dual Platform",         href: "/products/weighbridges/and4500-dual",          highlight: false },
+  { label: "IIT 4500 with GLCD Display",     href: "/products/weighbridges/iit4500-glcd",          highlight: false },
+  { label: "IIT 4500 with TFT Display",      href: "/products/weighbridges/iit4500-tft",           highlight: false },
+
 ];
 
 const SCALE_LINKS = [
@@ -32,7 +34,7 @@ const SCALE_LINKS = [
   { label: "Price Computing Scale",     href: "/products/scales/price-computing",             highlight: false },
   { label: "Jewel & Precision Scale",   href: "/products/scales/jewel",                       highlight: false },
   { label: "Crane & Hanging Scale",     href: "/products/scales/crane",                       highlight: false },
-  { label: "Personal Scale",            href: "/products/scales/personal",                    highlight: false },
+ 
 ];
 
 // ─── Component ────────────────────────────────────────────────────────────────

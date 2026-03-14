@@ -10,10 +10,6 @@ import {
   Calculator,
   Gem,
   Anchor,
-  User,
-  Zap,
-  Box,
-  BatteryFull,
   CheckCircle2,
 } from "lucide-react";
 
@@ -65,13 +61,43 @@ const WEIGHBRIDGES = [
   },
   {
     icon: Monitor,
-    name: "AND 4500 Dual Terminal",
+    name: "IIT 4500 Standard Terminal",
+    badge: "Single Platform",
+    popular: false,
+    accentColor: "#1E3A5F",
+    desc: "Specially designed weighbridge terminal for digital load cells. Standalone operation — weighing, data processing, saving, and printing. Built for industrial and public weighbridges.",
+    specs: ["32-bit ARM processor, 50 MHz", "1,00,000 record memory — USB .xls export", "Mandi app — Rate, Amount, deductions", "SMS in 3 modes · Pre-printed stationery"],
+    href: "/products/weighbridges/and4500-email",
+  },
+  {
+    icon: Monitor,
+    name: "IIT 4500 Dual Platform Terminal",
     badge: "Dual Platform",
     popular: false,
     accentColor: "#1E3A5F",
-    desc: "Single terminal controls two weighbridges. 1 lakh records, USB export, SMS alerts.",
-    specs: ["32-bit ARM processor", "Controls 2 weighbridges simultaneously", "1,00,000 record memory", "USB pen drive data export"],
+    desc: "Single operator room controls two weighbridges simultaneously. Each platform works independently — breakdown of one doesn't affect the other.",
+    specs: ["Controls 2 weighbridges independently", "Different capacities per platform supported", "1,00,000 record memory — USB export", "Mandi app + SMS + pre-printed stationery"],
     href: "/products/weighbridges/and4500-dual",
+  },
+  {
+    icon: Monitor,
+    name: "IIT 4500 with GLCD Display",
+    badge: "Graphical LCD",
+    popular: false,
+    accentColor: "#164e63",
+    desc: "IIT 4500 with Graphical LCD upgrade. Large weight characters for better visibility. View the full weighment ticket on screen in one go — no scrolling.",
+    specs: ["Large weight digit display for easy reading", "Full ticket view on LCD — all data at once", "11 Indian language headers (Hindi, Punjabi, Gujarati…)", "All IIT 4500 standard features included"],
+    href: "/products/weighbridges/iit4500-glcd",
+  },
+  {
+    icon: Monitor,
+    name: "IIT 4500 with TFT Display",
+    badge: "7\" TFT Colour",
+    popular: false,
+    accentColor: "#0369a1",
+    desc: "IIT 4500 with 7-inch full-colour TFT display. Sigma-Delta 24-bit A/D converter for maximum accuracy. Premium display variant for high-volume and high-visibility sites.",
+    specs: ["7\" multi-colour TFT display", "24-bit Sigma-Delta A/D converter", "25 samples/second conversion speed", "Drives up to 12 load cells of 350Ω"],
+    href: "/products/weighbridges/iit4500-tft",
   },
   {
     icon: Wifi,
@@ -130,39 +156,6 @@ const SCALES = [
     desc: "Large LED display, high-tension hook. 20m infrared remote. Wireless option.",
     specs: ["High-tension hook and shackle", "20m infrared remote controller", "Weight accumulation function", "kg / lb conversion | Wireless option"],
     href: "/products/scales/crane",
-  },
-  {
-    icon: User,
-    name: "Personal Scale",
-    badge: "180kg",
-    accentColor: "#374151",
-    desc: "Glass platform personal weighing scale. 180kg capacity, 100g division.",
-    specs: ["Capacity: 180kg | Division: 100g", "Toughened glass platform", "Regular LED display", "Compact and portable"],
-    href: "/products/scales/personal",
-  },
-];
-
-const ACCESSORIES = [
-  {
-    icon: Zap,
-    name: "Load Cell Transducers",
-    desc: "Minebea MTC 30T digital load cells. Made in India. Compatible with all Rite-Way weighbridges.",
-    href: "/products/load-cells",
-    accentColor: "#1E3A5F",
-  },
-  {
-    icon: Box,
-    name: "Junction Box & Summing",
-    desc: "4-channel load cell summing junction box. Weatherproof. Compatible with all platforms.",
-    href: "/products/load-cells",
-    accentColor: "#374151",
-  },
-  {
-    icon: BatteryFull,
-    name: "Batteries & Power",
-    desc: "Sealed lead acid batteries for weighbridge indicators and scale backup systems.",
-    href: "/products/load-cells",
-    accentColor: "#374151",
   },
 ];
 
@@ -288,8 +281,8 @@ function WeighbridgesSection() {
               Weighbridges
             </h2>
             <p className="text-gray-500 text-base mt-2 max-w-xl leading-relaxed">
-              Concrete and steel platform weighbridges from 40T to 200T, with smart terminals
-              and GPRS fleet monitoring systems.
+              Concrete and steel platform weighbridges from 40T to 200T, paired with IIT 4500
+              intelligent terminals — standard, dual-platform, GLCD, and TFT display variants.
             </p>
           </div>
           <Link href="/products/weighbridges"
@@ -310,8 +303,8 @@ function WeighbridgesSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {WEIGHBRIDGES.map((p) => <ProductCard key={p.href} {...p} />)}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {WEIGHBRIDGES.map((p) => <ProductCard key={p.name} {...p} />)}
         </div>
       </div>
     </section>
@@ -341,55 +334,6 @@ function ScalesSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {SCALES.map((p) => <ProductCard key={p.href} {...p} />)}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function AccessoriesSection() {
-  return (
-    <section className="bg-white py-20 md:py-24 border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="mb-12">
-          <SectionLabel>Spares &amp; Accessories</SectionLabel>
-          <h2 className="text-[#111827] font-bold text-3xl md:text-4xl leading-tight tracking-tight mb-2">
-            Accessories &amp; Spares
-          </h2>
-          <p className="text-gray-500 text-base leading-relaxed max-w-xl">
-            Genuine Rite-Way spare parts and accessories — compatible with all our weighbridges
-            and scales. Always use genuine parts to maintain Legal Metrology validity.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-          {ACCESSORIES.map(({ icon: Icon, name, desc, href, accentColor }) => (
-            <Link key={name} href={href}
-              className="bg-white border border-gray-100 rounded-sm p-6 flex flex-col hover:shadow-md hover:border-[#1E3A5F]/20 transition-all group"
-              style={{ boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
-              <div className="w-10 h-10 rounded-sm flex items-center justify-center mb-4 flex-shrink-0 transition-colors group-hover:opacity-90"
-                style={{ backgroundColor: accentColor }}>
-                <Icon size={17} className="text-white" />
-              </div>
-              <h3 className="text-[#111827] font-bold text-sm mb-2 group-hover:text-[#DC2626] transition-colors">
-                {name}
-              </h3>
-              <p className="text-gray-500 text-xs leading-relaxed flex-1">{desc}</p>
-              <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#1E3A5F] group-hover:text-[#DC2626] transition-colors">
-                View Details <ArrowRight size={11} />
-              </span>
-            </Link>
-          ))}
-        </div>
-
-        {/* Genuine parts warning */}
-        <div className="mt-8 bg-amber-50 border border-amber-200 rounded-sm px-5 py-4 flex items-start gap-3">
-          <div className="w-1.5 h-8 rounded-full bg-amber-400 flex-shrink-0 mt-0.5" />
-          <p className="text-sm text-amber-800 leading-relaxed">
-            <strong>Use genuine load cells and parts.</strong> Non-genuine components can cause
-            inaccurate readings and will invalidate your Legal Metrology verification stamp —
-            making your weighbridge illegal for commercial use.
-          </p>
         </div>
       </div>
     </section>
@@ -441,7 +385,6 @@ export default function ProductsPage() {
       <Hero />
       <WeighbridgesSection />
       <ScalesSection />
-      <AccessoriesSection />
       <CTABanner />
     </>
   );

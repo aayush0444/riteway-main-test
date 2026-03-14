@@ -146,13 +146,7 @@ const TERMINAL_CARDS = [
     desc: "Automatically emails Excel weighment reports to up to 5 email IDs via integrated GSM modem. No LAN or internet at the weighbridge site required. Pre-printed stationery support.",
     highlights: ["Auto Excel email reports", "Up to 5 email recipients", "GSM modem built-in", "No internet at site needed"],
   },
-  {
-    icon: Wifi,
-    title: "Payload-T GPRS System",
-    href: "/products/weighbridges/payload-gprs",
-    desc: "Cloud-based vehicle payload monitoring for mining companies and fleet operators. Real-time overload alerts, cloud reporting dashboard, and complete trip data for every vehicle.",
-    highlights: ["Cloud-based dashboard", "Real-time overload alerts", "Designed for mining & fleets", "Complete trip data"],
-  },
+ 
 ];
 
 const SIZES = [

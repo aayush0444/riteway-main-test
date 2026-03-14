@@ -234,11 +234,7 @@ function WhyNorthIndia() {
       title: "20 Years Serving Punjab, Haryana & Himachal",
       desc: "Since 2004, we have been serving the industrial and agricultural businesses of North India. We know the requirements, the terrain, the climate, and the compliance landscape.",
     },
-    {
-      icon: MessageSquare,
-      title: "Hindi & English Support",
-      desc: "Our team communicates fluently in Hindi and English. No language barrier when you call for a quote, during installation, or when you need service support.",
-    },
+  
   ];
 
   return (

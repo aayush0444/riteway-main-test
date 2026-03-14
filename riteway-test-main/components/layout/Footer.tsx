@@ -30,8 +30,10 @@ const QUICK_LINKS = [
 const PRODUCT_LINKS = [
   { label: "Concrete Weighbridge",      href: "/products/weighbridges/concrete-platform" },
   { label: "Steel Weighbridge",         href: "/products/weighbridges/steel-platform" },
-  { label: "AND 4500 Dual Terminal",    href: "/products/weighbridges/and4500-dual" },
-  { label: "AND 4500 Email Terminal",   href: "/products/weighbridges/and4500-email" },
+  { label: "IIT 4500 Standard Terminal",   href: "/products/weighbridges/and4500-email" },
+  { label: "IIT 4500 Dual Platform",       href: "/products/weighbridges/and4500-dual" },
+  { label: "IIT 4500 with GLCD Display",   href: "/products/weighbridges/iit4500-glcd" },
+  { label: "IIT 4500 with TFT Display",    href: "/products/weighbridges/iit4500-tft" },
   { label: "Payload-T GPRS System",     href: "/products/weighbridges/payload-gprs" },
   { label: "Table Top Scales",          href: "/products/scales/table-top" },
   { label: "Platform & Floor Scales",   href: "/products/scales/platform" },
@@ -217,4 +219,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-} 
+}
