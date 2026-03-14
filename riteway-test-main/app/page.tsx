@@ -19,7 +19,6 @@ import {
   Tractor,
   Grid,
   Monitor,
-  Wifi,
   LayoutGrid,
   Calculator,
   Gem,
@@ -61,7 +60,7 @@ function HeroSection() {
       {/* Red left accent */}
       <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626] z-10" aria-hidden="true" />
 
-<div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-24 md:pt-28 md:pb-32">
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-24 md:pt-28 md:pb-32">
         <div className="max-w-3xl">
 
           {/* Pre-label */}
@@ -147,11 +146,11 @@ function HeroSection() {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const TRUST_BADGES = [
-  { icon: Shield, label: "ISO 9001:2015 Certified", color: "#16a34a" },
-  { icon: Clock, label: "In Business Since 2004", color: "#1E3A5F" },
-  { icon: CheckCircle2, label: "Minebea Partner", color: "#1E3A5F" },
-  { icon: Zap, label: "Made in India", color: "#DC2626" },
-  { icon: Scale, label: "Legal Metrology Approved", color: "#1E3A5F" },
+  { icon: Shield,       label: "ISO 9001:2015 Certified",  color: "#16a34a" },
+  { icon: Clock,        label: "In Business Since 2004",   color: "#1E3A5F" },
+  { icon: CheckCircle2, label: "Minebea Partner",          color: "#1E3A5F" },
+  { icon: Zap,          label: "Made in India",            color: "#DC2626" },
+  { icon: Scale,        label: "Legal Metrology Approved", color: "#1E3A5F" },
 ];
 
 function TrustBadgeRow() {
@@ -176,9 +175,10 @@ function TrustBadgeRow() {
   );
 }
 
-
 // ─────────────────────────────────────────────────────────────────────────────
 // 3. PRODUCT ICON GRID
+// CHANGES: "AND 4500 Terminal" → "IIT 4500 Terminal", Payload GPRS card removed
+// Grid is now 7 cards (was 8), Wifi import also removed above
 // ─────────────────────────────────────────────────────────────────────────────
 
 const PRODUCT_CARDS = [
@@ -200,18 +200,10 @@ const PRODUCT_CARDS = [
   },
   {
     icon: "Monitor",
-    label: "AND 4500 Terminal",
+    label: "IIT 4500 Terminal",
     badge: "Dual Platform",
     badgeColor: "#1E3A5F",
     href: "/products/weighbridges/and4500-dual",
-    popular: false,
-  },
-  {
-    icon: "Wifi",
-    label: "Payload GPRS",
-    badge: "Fleet Monitoring",
-    badgeColor: "#0369a1",
-    href: "/products/weighbridges/payload-gprs",
     popular: false,
   },
   {
@@ -252,7 +244,6 @@ const ICON_MAP: Record<string, React.ComponentType<{ size?: number; className?: 
   Layers,
   Grid,
   Monitor,
-  Wifi,
   Scale,
   LayoutGrid,
   Calculator,
@@ -277,6 +268,7 @@ function ProductIconGrid() {
           </Link>
         </div>
 
+        {/* 7 cards — use auto-fit so they wrap cleanly on all screen sizes */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4">
           {PRODUCT_CARDS.map(({ icon, label, badge, badgeColor, href, popular }) => {
             const Icon = ICON_MAP[icon];
@@ -397,6 +389,7 @@ function WhyConcreteTeaser() {
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 5. PRODUCT CATEGORIES
+// CHANGE: "AND 4500 smart terminals" → "IIT 4500 smart terminals"
 // ─────────────────────────────────────────────────────────────────────────────
 
 function ProductCategories() {
@@ -418,7 +411,6 @@ function ProductCategories() {
             className="relative bg-white border border-gray-100 rounded-sm overflow-hidden group hover:shadow-lg transition-shadow duration-200"
             style={{ boxShadow: "0 2px 16px rgba(0,0,0,0.05)" }}
           >
-            {/* Top navy accent */}
             <div className="h-1 bg-[#1E3A5F]" />
             <div className="p-8 md:p-10">
               <div className="w-12 h-12 rounded-sm bg-[#1E3A5F] flex items-center justify-center mb-6">
@@ -443,7 +435,7 @@ function ProductCategories() {
                   "40T to 200T capacity range",
                   "Concrete & Steel platform options",
                   "Pit type & Pitless installation",
-                  "AND 4500 smart terminals",
+                  "IIT 4500 smart terminals",
                 ].map((f) => (
                   <li key={f} className="flex items-center gap-2 text-sm text-gray-600">
                     <CheckCircle2 size={14} className="text-[#1E3A5F] flex-shrink-0" />
@@ -519,10 +511,10 @@ function ProductCategories() {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const STATS = [
-  { value: "20+", label: "Years in Business", sub: "Since 2004" },
-  { value: "500+", label: "Installations", sub: "Across North India" },
-  { value: "40T–200T", label: "Weighbridge Range", sub: "All capacities" },
-  { value: "All India", label: "Service Network", sub: "Sales & AMC" },
+  { value: "20+",      label: "Years in Business",  sub: "Since 2004" },
+  { value: "500+",     label: "Installations",       sub: "Across North India" },
+  { value: "40T–200T", label: "Weighbridge Range",   sub: "All capacities" },
+  { value: "All India",label: "Service Network",     sub: "Sales & AMC" },
 ];
 
 function StatsRow() {
@@ -550,14 +542,14 @@ function StatsRow() {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const INDUSTRIES = [
-  { icon: Wheat, label: "Grain Mandis", desc: "Punjab & Haryana" },
-  { icon: Factory, label: "Manufacturing", desc: "Industrial plants" },
-  { icon: HardHat, label: "Construction", desc: "Site weighing" },
-  { icon: Pickaxe, label: "Mining", desc: "GPRS payload monitoring" },
-  { icon: Truck, label: "Logistics", desc: "Transport hubs" },
-  { icon: Tractor, label: "Agriculture", desc: "Farm produce" },
-  { icon: ShoppingBag, label: "Retail", desc: "Kirana & shops" },
-  { icon: Landmark, label: "Government", desc: "PWD & municipal" },
+  { icon: Wheat,       label: "Grain Mandis",   desc: "Punjab & Haryana" },
+  { icon: Factory,     label: "Manufacturing",  desc: "Industrial plants" },
+  { icon: HardHat,     label: "Construction",   desc: "Site weighing" },
+  { icon: Pickaxe,     label: "Mining",         desc: "GPRS payload monitoring" },
+  { icon: Truck,       label: "Logistics",      desc: "Transport hubs" },
+  { icon: Tractor,     label: "Agriculture",    desc: "Farm produce" },
+  { icon: ShoppingBag, label: "Retail",         desc: "Kirana & shops" },
+  { icon: Landmark,    label: "Government",     desc: "PWD & municipal" },
 ];
 
 function IndustriesGrid() {
@@ -601,7 +593,6 @@ function IndustriesGrid() {
             <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-150" />
           </Link>
         </div>
-
       </div>
     </section>
   );
@@ -614,7 +605,6 @@ function IndustriesGrid() {
 function CTABanner() {
   return (
     <section className="bg-[#1E3A5F] relative overflow-hidden">
-      {/* Subtle dot pattern */}
       <div
         className="absolute inset-0 pointer-events-none opacity-10"
         aria-hidden="true"
@@ -623,7 +613,6 @@ function CTABanner() {
           backgroundSize: "28px 28px",
         }}
       />
-      {/* Red left bar */}
       <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626]" aria-hidden="true" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-10 py-20 md:py-24">
@@ -644,7 +633,6 @@ function CTABanner() {
           </p>
 
           <div className="flex flex-wrap gap-4">
-            {/* WhatsApp */}
             <a
               href={WA_HREF}
               target="_blank"
@@ -657,7 +645,6 @@ function CTABanner() {
               WhatsApp Us Now
             </a>
 
-            {/* Phone */}
             <a
               href="tel:+919877541199"
               className="inline-flex items-center gap-2 border border-white/30 text-white text-sm font-semibold px-6 py-3.5 rounded-sm hover:bg-white/10 transition-colors duration-150"
@@ -666,7 +653,6 @@ function CTABanner() {
               +91 98775 41199
             </a>
 
-            {/* Quote */}
             <Link
               href="/get-quote"
               className="inline-flex items-center gap-2 bg-[#DC2626] text-white text-sm font-semibold px-6 py-3.5 rounded-sm hover:bg-red-700 transition-colors duration-150"
