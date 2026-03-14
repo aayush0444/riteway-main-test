@@ -38,7 +38,6 @@ const PRODUCT_LINKS = [
   { label: "Price Computing Scale",     href: "/products/scales/price-computing" },
   { label: "Jewel Precision Scale",     href: "/products/scales/jewel" },
   { label: "Crane & Hanging Scale",     href: "/products/scales/crane" },
-  { label: "Load Cells & Accessories",  href: "/products/load-cells" },
 ];
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -218,4 +217,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+} 

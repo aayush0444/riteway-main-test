@@ -66,7 +66,7 @@ function Hero() {
       {/* Hero photo */}
       <div className="absolute inset-0">
         <img
-          src="/images/products/weighbridges/ms-steel-weighbridge.png"
+          src="/images/products/weighbridges/pit-steel-weighbridge.jpeg"
           alt="Rite-Way Steel Platform Weighbridge — surface type installation"
           className="w-full h-full object-cover"
         />
@@ -290,7 +290,7 @@ function InstallationTypes() {
           >
             <div className="h-44 overflow-hidden">
               <img
-                src="/images/products/weighbridges/ms-steel-weighbridge.png"
+                src="/images/products/weighbridges/pit-steel-weighbridge.jpeg"
                 alt="Rite-Way Steel Platform Weighbridge — pit type installation"
                 className="w-full h-full object-cover"
               />
@@ -329,7 +329,7 @@ function InstallationTypes() {
           >
             <div className="h-44 overflow-hidden">
               <img
-                src="/images/products/weighbridges/pitless-weighbridge.jpeg"
+                src="/images/products/weighbridges/pitless-steel-weighbridge.jpeg"
                 alt="Rite-Way Steel Platform Weighbridge — pitless surface type"
                 className="w-full h-full object-cover"
               />
@@ -443,7 +443,7 @@ function SteelInstallationPhotos() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <img
-              src="/images/products/weighbridges/ms-steel-weighbridge.png"
+              src="/images/products/weighbridges/pit-steel-weighbridge.jpeg"
               alt="Rite-Way Steel Platform Weighbridge — pit type installation"
               className="w-full rounded-sm object-cover"
               style={{ aspectRatio: "4/3" }}
@@ -452,7 +452,7 @@ function SteelInstallationPhotos() {
           </div>
           <div>
             <img
-              src="/images/products/weighbridges/pitless-weighbridge.jpeg"
+              src="/images/products/weighbridges/pitless-steel-weighbridge.jpeg"
               alt="Rite-Way Steel Platform Weighbridge — pitless surface type"
               className="w-full rounded-sm object-cover"
               style={{ aspectRatio: "4/3" }}

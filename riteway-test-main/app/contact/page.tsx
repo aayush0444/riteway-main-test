@@ -31,7 +31,6 @@ const PRODUCTS = [
   "SS Price Computing Scale",
   "Crane / Hanging Scale",
   "Personal Scale",
-  "Load Cells & Accessories",
   "Other / Not Sure",
 ];
 

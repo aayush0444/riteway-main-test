@@ -12,53 +12,7 @@ import {
   MapPin,
   Clock,
   MessageSquare,
-  HardHat,
-  Tractor,
-  ShoppingBag,
 } from "lucide-react";
-
-// ─── Reusable image placeholder ───────────────────────────────────────────────
-// Replace with next/image when real photos available. aspect-ratio keeps layout stable.
-function ImgPlaceholder({
-  label,
-  icon: Icon,
-  badge = "Photo Coming Soon",
-  aspect = "16/9",
-  height,
-  className = "",
-}: {
-  label: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
-  badge?: string;
-  aspect?: string;
-  height?: string;
-  className?: string;
-}) {
-  return (
-    <div
-      className={"w-full relative overflow-hidden " + className}
-      style={{
-        background: "#1E3A5F",
-        aspectRatio: height ? undefined : aspect,
-        height: height,
-      }}
-    >
-      {/* Dot-grid pattern */}
-      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-      {/* Vignette */}
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
-      {/* Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
-        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
-          <Icon size={28} className="text-white/70" />
-        </div>
-        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
-        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
-      </div>
-    </div>
-  );
-}
-
 
 const WA_BASE = "https://wa.me/919877541199?text=";
 
@@ -166,9 +120,13 @@ const INDUSTRIES = [
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-gray-100">
-      {/* Photo: Industries collage — grain mandi, mining, factory, logistics */}
+      {/* Hero photo — weighbridge in industrial context */}
       <div className="absolute inset-0">
-        <ImgPlaceholder label="Industries Served — Grain Mandi, Mining, Manufacturing, Logistics, Retail" icon={Factory} height="100%" className="h-full" />
+        <img
+          src="/images/hero/weighbridge-hero.png"
+          alt="Rite-Way weighing solutions across industries — Punjab, North India"
+          className="w-full h-full object-cover"
+        />
       </div>
       {/* Dark overlay for text readability */}
       <div className="absolute inset-0 bg-[#1E3A5F]/70 pointer-events-none" />
@@ -215,8 +173,23 @@ function IndustryCards() {
               className="bg-white border border-gray-100 rounded-sm overflow-hidden flex flex-col hover:shadow-lg transition-all duration-200 group"
               style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
 
-              {/* Photo: {name} industry environment */}
-              <ImgPlaceholder label={name} icon={Icon} badge="Photo Coming Soon" aspect="16/9" className="" />
+              {/* Colored header — icon + name + tagline */}
+              <div
+                className="relative overflow-hidden px-5 py-6 flex flex-col gap-3"
+                style={{ background: `linear-gradient(135deg, ${gradientFrom} 0%, ${gradientTo} 100%)` }}
+              >
+                <div className="absolute inset-0 pointer-events-none"
+                  style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
+                <div className="relative z-10 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-sm bg-white/15 flex items-center justify-center flex-shrink-0">
+                    <Icon size={20} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-white font-bold text-base leading-snug">{name}</p>
+                    <p className="text-white/60 text-[0.65rem] font-semibold uppercase tracking-wider mt-0.5">{tagline}</p>
+                  </div>
+                </div>
+              </div>
 
               {/* Content */}
               <div className="p-5 flex flex-col flex-1">

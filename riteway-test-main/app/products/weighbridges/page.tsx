@@ -3,7 +3,6 @@ import {
   ArrowRight,
   CheckCircle2,
   XCircle,
-  Truck,
   Zap,
   Clock,
   TrendingDown,
@@ -11,52 +10,7 @@ import {
   BarChart3,
   Mail,
   Wifi,
-  Layers,
-  Grid,
 } from "lucide-react";
-
-// ─── Reusable image placeholder ───────────────────────────────────────────────
-// Replace with next/image when real photos available. aspect-ratio keeps layout stable.
-function ImgPlaceholder({
-  label,
-  icon: Icon,
-  badge = "Photo Coming Soon",
-  aspect = "16/9",
-  height,
-  className = "",
-}: {
-  label: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
-  badge?: string;
-  aspect?: string;
-  height?: string;
-  className?: string;
-}) {
-  return (
-    <div
-      className={"w-full relative overflow-hidden " + className}
-      style={{
-        background: "#1E3A5F",
-        aspectRatio: height ? undefined : aspect,
-        height: height,
-      }}
-    >
-      {/* Dot-grid pattern */}
-      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-      {/* Vignette */}
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
-      {/* Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
-        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
-          <Icon size={28} className="text-white/70" />
-        </div>
-        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
-        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
-      </div>
-    </div>
-  );
-}
-
 
 // ─── Shared ───────────────────────────────────────────────────────────────────
 
@@ -218,9 +172,13 @@ const SIZES = [
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-gray-100">
-      {/* Photo: Rite-Way weighbridge installation — hero background */}
+      {/* Hero photo */}
       <div className="absolute inset-0">
-        <ImgPlaceholder label="Rite-Way Weighbridge Installation — Mohali, Punjab" icon={Truck} height="100%" className="h-full" />
+        <img
+          src="/images/products/weighbridges/pit-concrete-weighbridge.jpeg"
+          alt="Rite-Way weighbridge installation — Mohali, Punjab"
+          className="w-full h-full object-cover"
+        />
       </div>
       {/* Dark overlay for text readability */}
       <div className="absolute inset-0 bg-[#1E3A5F]/70 pointer-events-none" />
@@ -282,34 +240,12 @@ function Hero() {
 
 // ─── 2. Product Cards ─────────────────────────────────────────────────────────
 
-function PlaceholderImage({
-  title,
-  subtitle,
-  icon: Icon = Truck,
-}: {
-  from?: string;
-  to?: string;
-  patternOpacity?: number;
-  title: string;
-  subtitle: string;
-  icon?: React.ComponentType<{ size?: number; className?: string }>;
-}) {
-  return (
-    /* Photo: {title} */
-    <div className="w-full relative overflow-hidden" style={{ background: "#1E3A5F", aspectRatio: "16/9" }}>
-      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.13) 1px, transparent 1px)", backgroundSize: "22px 22px" }} />
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.30) 100%)" }} />
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-6 text-center">
-        <div className="w-14 h-14 rounded-sm bg-white/10 border border-white/10 flex items-center justify-center">
-          <Icon size={26} className="text-white/65" />
-        </div>
-        <p className="text-white font-semibold text-sm md:text-base leading-snug max-w-xs tracking-tight">{title}</p>
-        <p className="text-white/40 text-[0.58rem] font-bold uppercase tracking-widest">{subtitle}</p>
-        <span className="text-[0.58rem] font-bold uppercase tracking-[0.14em] text-white/35 bg-black/25 px-3 py-1 rounded-full">Photo Coming Soon</span>
-      </div>
-    </div>
-  );
-}
+const CARD_PHOTOS: Record<string, string> = {
+  "concrete-platform": "/images/products/weighbridges/pit-concrete-weighbridge.jpeg",
+  "concrete-pitless":  "/images/products/weighbridges/pitless-weighbridge.jpeg",
+  "steel-platform":    "/images/products/weighbridges/pit-steel-weighbridge.jpeg",
+  "steel-pitless":     "/images/products/weighbridges/pitless-steel-weighbridge.jpeg",
+};
 
 function ProductCards() {
   return (
@@ -333,13 +269,12 @@ function ProductCards() {
               className="border border-gray-100 rounded-sm overflow-hidden hover:shadow-lg transition-all duration-200 group bg-white flex flex-col"
               style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}
             >
-              {/* Image placeholder */}
-              <PlaceholderImage
-                from={card.gradientFrom}
-                to={card.gradientTo}
-                patternOpacity={card.patternOpacity}
-                title={card.title}
-                subtitle={card.subtitle}
+              {/* Product photo */}
+              <img
+                src={CARD_PHOTOS[card.id]}
+                alt={`Rite-Way ${card.title} — ${card.subtitle}`}
+                className="w-full object-cover"
+                style={{ aspectRatio: "16/9" }}
               />
 
               <div className="p-6 flex flex-col flex-1">
