@@ -12,51 +12,7 @@ import {
   Zap,
   Grid,
   Truck,
-  Camera,
 } from "lucide-react";
-
-// ─── Reusable image placeholder ───────────────────────────────────────────────
-// Replace with next/image when real photos available. aspect-ratio keeps layout stable.
-function ImgPlaceholder({
-  label,
-  icon: Icon,
-  badge = "Photo Coming Soon",
-  aspect = "16/9",
-  height,
-  className = "",
-}: {
-  label: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
-  badge?: string;
-  aspect?: string;
-  height?: string;
-  className?: string;
-}) {
-  return (
-    <div
-      className={"w-full relative overflow-hidden " + className}
-      style={{
-        background: "#1E3A5F",
-        aspectRatio: height ? undefined : aspect,
-        height: height,
-      }}
-    >
-      {/* Dot-grid pattern */}
-      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-      {/* Vignette */}
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
-      {/* Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
-        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
-          <Icon size={28} className="text-white/70" />
-        </div>
-        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
-        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
-      </div>
-    </div>
-  );
-}
-
 
 // ─── Shared ───────────────────────────────────────────────────────────────────
 
@@ -107,9 +63,13 @@ const SIZES = [
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-gray-100">
-      {/* Photo placeholder: Steel Platform Weighbridge — Surface Type Installation */}
+      {/* Hero photo */}
       <div className="absolute inset-0">
-        <ImgPlaceholder label="Steel Platform Weighbridge — Surface Type Installation" icon={Grid} height="100%" className="h-full" />
+        <img
+          src="/images/products/weighbridges/ms-steel-weighbridge.png"
+          alt="Rite-Way Steel Platform Weighbridge — surface type installation"
+          className="w-full h-full object-cover"
+        />
       </div>
       {/* Dark overlay for text readability */}
       <div className="absolute inset-0 bg-[#1E3A5F]/70 pointer-events-none" />
@@ -328,18 +288,12 @@ function InstallationTypes() {
             className="border border-gray-100 rounded-sm overflow-hidden hover:shadow-lg transition-shadow duration-200"
             style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}
           >
-            <div
-              className="h-44 relative overflow-hidden"
-              style={{ background: "#1E3A5F" }}
-            >
-              <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.13) 1px, transparent 1px)", backgroundSize: "22px 22px" }} />
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2.5 z-10">
-                <div className="w-12 h-12 rounded-sm bg-white/10 flex items-center justify-center">
-                  <Grid size={24} className="text-white/80" />
-                </div>
-                <p className="text-white font-bold text-sm tracking-tight text-center px-4">Steel Platform — Pit Type</p>
-                <span className="text-[0.58rem] font-bold uppercase tracking-widest text-white bg-white/15 px-2.5 py-1 rounded-full">40T – 150T</span>
-              </div>
+            <div className="h-44 overflow-hidden">
+              <img
+                src="/images/products/weighbridges/ms-steel-weighbridge.png"
+                alt="Rite-Way Steel Platform Weighbridge — pit type installation"
+                className="w-full h-full object-cover"
+              />
             </div>
 
             <div className="p-7">
@@ -373,18 +327,12 @@ function InstallationTypes() {
             className="border border-gray-100 rounded-sm overflow-hidden hover:shadow-lg transition-shadow duration-200"
             style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}
           >
-            <div
-              className="h-44 relative overflow-hidden"
-              style={{ background: "#1E3A5F" }}
-            >
-              <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.13) 1px, transparent 1px)", backgroundSize: "22px 22px" }} />
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2.5 z-10">
-                <div className="w-12 h-12 rounded-sm bg-white/10 flex items-center justify-center">
-                  <Grid size={24} className="text-white/80" />
-                </div>
-                <p className="text-white font-bold text-sm tracking-tight text-center px-4">Steel Platform — Pitless</p>
-                <span className="text-[0.58rem] font-bold uppercase tracking-widest text-white bg-white/15 px-2.5 py-1 rounded-full">Surface Type</span>
-              </div>
+            <div className="h-44 overflow-hidden">
+              <img
+                src="/images/products/weighbridges/pitless-weighbridge.jpeg"
+                alt="Rite-Way Steel Platform Weighbridge — pitless surface type"
+                className="w-full h-full object-cover"
+              />
             </div>
 
             <div className="p-7">
@@ -493,14 +441,22 @@ function SteelInstallationPhotos() {
     <section className="bg-white py-10 border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Photo placeholder: Steel Pit Type */}
           <div>
-            <ImgPlaceholder label="Steel Platform — Pit Type Installation" icon={Grid} aspect="4/3" className="rounded-sm" />
+            <img
+              src="/images/products/weighbridges/ms-steel-weighbridge.png"
+              alt="Rite-Way Steel Platform Weighbridge — pit type installation"
+              className="w-full rounded-sm object-cover"
+              style={{ aspectRatio: "4/3" }}
+            />
             <p className="text-xs text-gray-400 mt-2 text-center">Steel Pit Type Installation</p>
           </div>
-          {/* Photo placeholder: Steel Pitless */}
           <div>
-            <ImgPlaceholder label="Steel Platform — Pitless Surface Type" icon={Grid} aspect="4/3" className="rounded-sm" />
+            <img
+              src="/images/products/weighbridges/pitless-weighbridge.jpeg"
+              alt="Rite-Way Steel Platform Weighbridge — pitless surface type"
+              className="w-full rounded-sm object-cover"
+              style={{ aspectRatio: "4/3" }}
+            />
             <p className="text-xs text-gray-400 mt-2 text-center">Steel Pitless (Surface Type)</p>
           </div>
         </div>

@@ -14,51 +14,7 @@ import {
   FlaskConical,
   Pill,
   Sparkles,
-  Camera,
 } from "lucide-react";
-
-// ─── Reusable image placeholder ───────────────────────────────────────────────
-// Replace with next/image when real photos available. aspect-ratio keeps layout stable.
-function ImgPlaceholder({
-  label,
-  icon: Icon,
-  badge = "Photo Coming Soon",
-  aspect = "16/9",
-  height,
-  className = "",
-}: {
-  label: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
-  badge?: string;
-  aspect?: string;
-  height?: string;
-  className?: string;
-}) {
-  return (
-    <div
-      className={"w-full relative overflow-hidden " + className}
-      style={{
-        background: "#1E3A5F",
-        aspectRatio: height ? undefined : aspect,
-        height: height,
-      }}
-    >
-      {/* Dot-grid pattern */}
-      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-      {/* Vignette */}
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
-      {/* Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
-        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
-          <Icon size={28} className="text-white/70" />
-        </div>
-        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
-        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
-      </div>
-    </div>
-  );
-}
-
 
 const WA_BASE = "https://wa.me/919877541199?text=";
 
@@ -184,8 +140,12 @@ function JewelHeroPhoto() {
   return (
     <section className="bg-white py-10 border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        {/* Photo placeholder: Jewel Precision Scale — close up */}
-        <ImgPlaceholder label="Jewel Precision Balance Scale — Close-Up Detail" icon={Gem} aspect="16/9" className="rounded-sm max-w-2xl mx-auto" />
+        <img
+          src="/images/products/scales/jewel-scale.png"
+          alt="Rite-Way Jewel Precision Balance Scale — milligram accuracy"
+          className="w-full rounded-sm object-cover max-w-2xl mx-auto block"
+          style={{ aspectRatio: "16/9" }}
+        />
         <p className="text-xs text-gray-400 mt-2 text-center">Rite-Way Jewel Precision Scale — milligram accuracy</p>
       </div>
     </section>
@@ -264,8 +224,12 @@ function JewelleryShopPhoto() {
   return (
     <section className="bg-gray-50 py-10 border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        {/* Photo placeholder: Jewel Scale in jewellery shop */}
-        <ImgPlaceholder label="Jewel Scale in Jewellery Shop — Daily Weighing Application" icon={Gem} aspect="21/9" className="rounded-sm" />
+        <img
+          src="/images/products/scales/jewel-scale.png"
+          alt="Rite-Way Jewel Scale in jewellery shop — daily weighing application"
+          className="w-full rounded-sm object-cover"
+          style={{ aspectRatio: "21/9" }}
+        />
         <p className="text-xs text-gray-400 mt-2 text-center">Jewel scale in use — jewellery shop, Punjab</p>
       </div>
     </section>

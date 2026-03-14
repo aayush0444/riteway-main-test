@@ -11,54 +11,7 @@ import {
   Globe,
   TrendingUp,
   Car,
-  Layers,
-  Truck,
-  Camera,
-  Grid,
 } from "lucide-react";
-
-// ─── Reusable image placeholder ───────────────────────────────────────────────
-// Replace with next/image when real photos available. aspect-ratio keeps layout stable.
-function ImgPlaceholder({
-  label,
-  icon: Icon,
-  badge = "Photo Coming Soon",
-  aspect = "16/9",
-  height,
-  className = "",
-}: {
-  label: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
-  badge?: string;
-  aspect?: string;
-  height?: string;
-  className?: string;
-}) {
-  return (
-    <div
-      className={"w-full relative overflow-hidden " + className}
-      style={{
-        background: "#1E3A5F",
-        aspectRatio: height ? undefined : aspect,
-        height: height,
-      }}
-    >
-      {/* Dot-grid pattern */}
-      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-      {/* Vignette */}
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
-      {/* Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
-        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
-          <Icon size={28} className="text-white/70" />
-        </div>
-        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
-        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
-      </div>
-    </div>
-  );
-}
-
 
 // ─── Shared ───────────────────────────────────────────────────────────────────
 
@@ -147,20 +100,20 @@ const COMPARISON_ROWS = [
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-gray-100">
-      {/* Photo placeholder: Concrete Weighbridge Platform with Truck — Why Concrete Outperforms Steel */}
+      {/* Hero photo */}
       <div className="absolute inset-0">
         <img
           src="/images/products/weighbridges/rcc-concrete-platform.jpeg"
-          alt="RCC Concrete Platform Weighbridge — Real Installation"
+          alt="Rite-Way RCC concrete platform weighbridge — why concrete outperforms steel"
           className="w-full h-full object-cover"
-        />className
+        />
       </div>
       {/* Dark overlay for text readability */}
       <div className="absolute inset-0 bg-[#1E3A5F]/70 pointer-events-none" />
       {/* Red left accent */}
       <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#DC2626] z-10" aria-hidden="true" />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-24 md:pt-28 md:pb-32">
+<div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-24 md:pt-28 md:pb-32">
         <div className="max-w-3xl">
           <div className="flex items-center gap-3 mb-6">
             <span className="h-px w-8 bg-[#DC2626]" />
@@ -299,18 +252,6 @@ function AdvantageCards() {
 
 // ─── Europe Stat Banner ───────────────────────────────────────────────────────
 
-function EuropeanInstallationPhoto() {
-  return (
-    <section className="bg-white py-10 border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        {/* Photo placeholder: European Concrete Weighbridge Installation */}
-        <ImgPlaceholder label="European Concrete Weighbridge Installation — Industry Standard (95% Market Share)" icon={Layers} aspect="21/9" className="rounded-sm" />
-        <p className="text-xs text-gray-400 mt-2 text-center">95% of electronic weighbridges in Europe use concrete platform — the proven standard</p>
-      </div>
-    </section>
-  );
-}
-
 function EuropeBanner() {
   return (
     <section className="bg-[#1E3A5F] py-16 relative overflow-hidden">
@@ -409,8 +350,9 @@ function ComparisonTable() {
           {COMPARISON_ROWS.map(({ attribute, concrete, steel }, i) => (
             <div
               key={attribute}
-              className={`grid grid-cols-3 border-b border-gray-100 last:border-b-0 hover:bg-gray-50/50 transition-colors ${i % 2 === 0 ? "bg-white" : "bg-gray-50/30"
-                }`}
+              className={`grid grid-cols-3 border-b border-gray-100 last:border-b-0 hover:bg-gray-50/50 transition-colors ${
+                i % 2 === 0 ? "bg-white" : "bg-gray-50/30"
+              }`}
             >
               <div className="px-5 py-4 flex items-center">
                 <span className="text-sm font-semibold text-[#111827]">{attribute}</span>
@@ -448,18 +390,6 @@ const SIZES = [
   { size: "18×3m", capacity: "150T" },
   { size: "24×3m", capacity: "200T" },
 ];
-
-function ConcreteSteelComparisonPhoto() {
-  return (
-    <section className="bg-white py-10 border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        {/* Photo placeholder: Concrete vs Steel Platform side by side */}
-        <ImgPlaceholder label="Concrete vs Steel Weighbridge Platform — Side by Side Comparison" icon={Camera} aspect="21/9" className="rounded-sm" />
-        <p className="text-xs text-gray-400 mt-2 text-center">Visual comparison — concrete platform (left) vs steel platform (right)</p>
-      </div>
-    </section>
-  );
-}
 
 function SizesAvailable() {
   return (
@@ -553,7 +483,7 @@ function CTABanner() {
               className="inline-flex items-center gap-2 bg-[#25D366] text-white text-sm font-semibold px-6 py-3.5 rounded-sm hover:bg-green-500 transition-colors"
             >
               <svg width="16" height="16" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                <path fillRule="evenodd" clipRule="evenodd" d="M16 2C8.268 2 2 8.268 2 16c0 2.478.643 4.805 1.768 6.83L2 30l7.363-1.733A13.94 13.94 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.5a11.44 11.44 0 0 1-5.826-1.594l-.418-.248-4.368 1.028 1.055-4.258-.272-.437A11.44 11.44 0 0 1 4.5 16C4.5 9.648 9.648 4.5 16 4.5S27.5 9.648 27.5 16 22.352 27.5 16 27.5zm6.27-8.545c-.344-.172-2.035-1.004-2.35-1.118-.316-.115-.546-.172-.776.172-.23.344-.89 1.118-1.09 1.348-.2.23-.4.258-.745.086-.344-.172-1.453-.536-2.767-1.707-1.023-.912-1.713-2.038-1.913-2.382-.2-.344-.021-.53.15-.701.155-.155.344-.403.516-.604.172-.2.23-.344.344-.574.115-.23.057-.43-.029-.603-.086-.172-.776-1.872-1.063-2.563-.28-.673-.564-.582-.776-.593l-.66-.011c-.23 0-.603.086-.918.43-.316.344-1.205 1.177-1.205 2.87s1.234 3.33 1.406 3.56c.172.23 2.428 3.71 5.88 5.202.823.355 1.465.567 1.965.726.826.263 1.578.226 2.172.137.662-.099 2.035-.832 2.322-1.635.287-.803.287-1.49.2-1.635-.086-.144-.316-.23-.66-.402z" fill="white" />
+                <path fillRule="evenodd" clipRule="evenodd" d="M16 2C8.268 2 2 8.268 2 16c0 2.478.643 4.805 1.768 6.83L2 30l7.363-1.733A13.94 13.94 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.5a11.44 11.44 0 0 1-5.826-1.594l-.418-.248-4.368 1.028 1.055-4.258-.272-.437A11.44 11.44 0 0 1 4.5 16C4.5 9.648 9.648 4.5 16 4.5S27.5 9.648 27.5 16 22.352 27.5 16 27.5zm6.27-8.545c-.344-.172-2.035-1.004-2.35-1.118-.316-.115-.546-.172-.776.172-.23.344-.89 1.118-1.09 1.348-.2.23-.4.258-.745.086-.344-.172-1.453-.536-2.767-1.707-1.023-.912-1.713-2.038-1.913-2.382-.2-.344-.021-.53.15-.701.155-.155.344-.403.516-.604.172-.2.23-.344.344-.574.115-.23.057-.43-.029-.603-.086-.172-.776-1.872-1.063-2.563-.28-.673-.564-.582-.776-.593l-.66-.011c-.23 0-.603.086-.918.43-.316.344-1.205 1.177-1.205 2.87s1.234 3.33 1.406 3.56c.172.23 2.428 3.71 5.88 5.202.823.355 1.465.567 1.965.726.826.263 1.578.226 2.172.137.662-.099 2.035-.832 2.322-1.635.287-.803.287-1.49.2-1.635-.086-.144-.316-.23-.66-.402z" fill="white"/>
               </svg>
               WhatsApp Our Team
             </a>
@@ -584,10 +514,8 @@ export default function WhyConcretePage() {
     <>
       <Hero />
       <AdvantageCards />
-      <EuropeanInstallationPhoto />
       <EuropeBanner />
       <ComparisonTable />
-      <ConcreteSteelComparisonPhoto />
       <SizesAvailable />
       <CTABanner />
     </>

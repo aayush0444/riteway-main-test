@@ -1,13 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, MapPin, Gauge, Wrench, ClipboardCheck, Camera ,  Layers,
-  Grid,
-  LayoutGrid,
-  Gem,
-  Pickaxe,
-  Scale,
-  Building2,
-  Truck,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, MapPin, Gauge, Wrench, ClipboardCheck } from "lucide-react";
 
 const WA_HREF = "https://wa.me/919877541199?text=" + encodeURIComponent("Hello Rite-Way, I would like to see installation examples from my industry. Please share photos and references.");
 
@@ -29,49 +21,6 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
     </span>
   );
 }
-
-// ─── Reusable image placeholder ───────────────────────────────────────────────
-// Replace with next/image when real photos available. aspect-ratio keeps layout stable.
-function ImgPlaceholder({
-  label,
-  icon: Icon,
-  badge = "Photo Coming Soon",
-  aspect = "16/9",
-  height,
-  className = "",
-}: {
-  label: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
-  badge?: string;
-  aspect?: string;
-  height?: string;
-  className?: string;
-}) {
-  return (
-    <div
-      className={"w-full relative overflow-hidden " + className}
-      style={{
-        background: "#1E3A5F",
-        aspectRatio: height ? undefined : aspect,
-        height: height,
-      }}
-    >
-      {/* Dot-grid pattern */}
-      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-      {/* Vignette */}
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
-      {/* Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
-        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
-          <Icon size={28} className="text-white/70" />
-        </div>
-        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
-        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
-      </div>
-    </div>
-  );
-}
-
 
 function Hero() {
   return (
@@ -140,16 +89,18 @@ function StatsRow() {
 }
 
 function PhotoGallery() {
-  const GALLERY = [
-    { label: "Concrete Weighbridge — Punjab Factory",     icon: Layers,      cap: "80T"        },
-    { label: "Steel Weighbridge — Haryana Mandi",         icon: Grid,        cap: "60T"        },
-    { label: "Platform Scale — Cold Storage",             icon: LayoutGrid,  cap: "1000kg"     },
-    { label: "Jewel Scale — Jewellery Shop",              icon: Gem,         cap: "300g"       },
-    { label: "Weighbridge — Mining Site",                 icon: Pickaxe,     cap: "100T"       },
-    { label: "Table Top Scale — Retail Shop",             icon: Scale,       cap: "30kg"       },
-    { label: "Concrete Weighbridge — Government Site",    icon: Building2,   cap: "100T"       },
-    { label: "Platform Scale — Warehouse",                icon: LayoutGrid,  cap: "2000kg"     },
-    { label: "Weighbridge — Logistics Hub",               icon: Truck,       cap: "150T"       },
+  const PHOTOS = [
+    "/images/installations/installations-1.jpeg",
+    "/images/installations/installations-2.jpeg",
+    "/images/installations/installations-3.jpeg",
+    "/images/installations/installations-4.jpeg",
+    "/images/installations/installations-5.jpeg",
+    "/images/installations/installations-6.jpeg",
+    "/images/installations/installations-7.jpeg",
+    "/images/installations/installations-8.jpeg",
+    "/images/installations/installations-9.jpeg",
+    "/images/installations/installations-10.jpeg",
+    "/images/installations/installations-11.jpeg",
   ];
   return (
     <section className="bg-gray-50 py-20 md:py-24 border-b border-gray-100">
@@ -158,19 +109,27 @@ function PhotoGallery() {
           <span className="inline-block text-[#DC2626] font-semibold mb-3" style={{ fontSize: "0.68rem", letterSpacing: "0.16em", textTransform: "uppercase" }}>Installation Gallery</span>
           <h2 className="text-[#111827] font-bold text-3xl md:text-4xl leading-tight tracking-tight mb-3">500+ Installations</h2>
           <p className="text-gray-500 text-base leading-relaxed">
-            Weighbridges and scales installed across Punjab, Haryana, Himachal Pradesh, J&K and Delhi NCR.
-            Photos of our completed installations will appear here shortly.
+            Weighbridges and scales installed across Punjab, Haryana, Himachal Pradesh, J&amp;K and Delhi NCR.
           </p>
         </div>
-        {/* 3×3 photo grid */}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-          {GALLERY.map(({ label, icon: Icon, cap }) => (
-            <div key={label} className="rounded-sm overflow-hidden border border-gray-100" style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
-              {/* Photo placeholder: {label} */}
-              <ImgPlaceholder label={label} icon={Icon} badge={cap + " · Photo Coming Soon"} aspect="4/3" />
+          {PHOTOS.map((src, i) => (
+            <div
+              key={src}
+              className="rounded-sm overflow-hidden border border-gray-100"
+              style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}
+            >
+              <img
+                src={src}
+                alt={`Rite-Way installation ${i + 1} — weighbridge or scale, North India`}
+                className="w-full object-cover"
+                style={{ aspectRatio: "16/9" }}
+              />
             </div>
           ))}
         </div>
+
         <div className="text-center">
           <p className="text-gray-500 text-sm mb-4">Want to see installations from your specific industry?</p>
           <a href="https://wa.me/919877541199?text=Hello%20Rite-Way%2C%20I%20would%20like%20to%20see%20installation%20photos%20from%20my%20industry."

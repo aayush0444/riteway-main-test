@@ -39,6 +39,7 @@ const PRODUCTS = [
     badgeClass: "text-orange-700 bg-orange-50 border-orange-100",
     gradientFrom: "#1E3A5F",
     gradientTo: "#2d5a8e",
+    photo: "/images/products/loadcells/cup-ball-loadcell.png",
     desc: "Precision load cell transducer manufactured under the Minebea brand. Digital output for maximum signal accuracy over long cable runs. Engineered and tested for all Rite-Way weighbridge configurations.",
     specs: [
       { label: "Model",         value: "MTC 30T" },
@@ -166,22 +167,32 @@ function ProductsGrid() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {PRODUCTS.map(({ icon: Icon, name, model, badge, badgeClass, gradientFrom, gradientTo, desc, specs, highlights, waMsg }) => (
+          {PRODUCTS.map(({ icon: Icon, name, model, badge, badgeClass, gradientFrom, gradientTo, photo, desc, specs, highlights, waMsg }) => (
             <div key={name}
               className="bg-white border border-gray-100 rounded-sm overflow-hidden flex flex-col hover:shadow-lg transition-all duration-200 group"
               style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
-              {/* Header */}
-              <div className="h-36 relative overflow-hidden flex items-end"
-                style={{ background: `linear-gradient(135deg, ${gradientFrom} 0%, ${gradientTo} 100%)` }}>
-                <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(to right,rgba(255,255,255,0.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.07) 1px,transparent 1px)", backgroundSize: "18px 18px" }} />
-                <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                  <Icon size={64} className="text-white" />
+              {/* Header — real photo if available, else gradient */}
+              {photo ? (
+                <div className="h-36 relative overflow-hidden">
+                  <img
+                    src={photo}
+                    alt={`Rite-Way ${name}`}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                <div className="relative px-4 pb-3 z-10">
-                  <p className="text-white/50 text-[0.55rem] font-bold uppercase tracking-widest mb-0.5">{model}</p>
-                  <p className="text-white font-bold text-sm leading-snug">{name}</p>
+              ) : (
+                <div className="h-36 relative overflow-hidden flex items-end"
+                  style={{ background: `linear-gradient(135deg, ${gradientFrom} 0%, ${gradientTo} 100%)` }}>
+                  <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(to right,rgba(255,255,255,0.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.07) 1px,transparent 1px)", backgroundSize: "18px 18px" }} />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-10">
+                    <Icon size={64} className="text-white" />
+                  </div>
+                  <div className="relative px-4 pb-3 z-10">
+                    <p className="text-white/50 text-[0.55rem] font-bold uppercase tracking-widest mb-0.5">{model}</p>
+                    <p className="text-white font-bold text-sm leading-snug">{name}</p>
+                  </div>
                 </div>
-              </div>
+              )}
 
               <div className="p-5 flex flex-col flex-1">
                 <span className={`inline-block text-[0.55rem] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border mb-3 ${badgeClass}`}>{badge}</span>

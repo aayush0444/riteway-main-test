@@ -13,46 +13,9 @@ import {
   BatteryFull,
   Monitor,
   Activity,
-  Camera,
 } from "lucide-react";
 
-// ─── Reusable image placeholder ───────────────────────────────────────────────
-function ImgPlaceholder({
-  label,
-  icon: Icon,
-  badge = "Photo Coming Soon",
-  aspect = "16/9",
-  height,
-  className = "",
-}: {
-  label: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
-  badge?: string;
-  aspect?: string;
-  height?: string;
-  className?: string;
-}) {
-  return (
-    <div
-      className={"w-full relative overflow-hidden " + className}
-      style={{
-        background: "#1E3A5F",
-        aspectRatio: height ? undefined : aspect,
-        height: height,
-      }}
-    >
-      <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)" }} />
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 px-4">
-        <div className="w-14 h-14 rounded-sm bg-white/10 flex items-center justify-center">
-          <Icon size={28} className="text-white/70" />
-        </div>
-        <p className="text-white font-bold text-sm md:text-base tracking-tight text-center leading-snug max-w-xs">{label}</p>
-        <span className="text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gray-400 bg-black/30 px-3 py-1 rounded-full">{badge}</span>
-      </div>
-    </div>
-  );
-}
+// ─── Shared ───────────────────────────────────────────────────────────────────
 
 const WA_BASE = "https://wa.me/919877541199?text=";
 
@@ -75,6 +38,8 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
+// ─── Variant Data ─────────────────────────────────────────────────────────────
+
 const VARIANTS = [
   {
     id: "metal",
@@ -85,12 +50,12 @@ const VARIANTS = [
     gradientFrom: "#374151",
     gradientTo: "#4b5563",
     specs: [
-      { label: "Capacity",       value: "30 kg" },
-      { label: "Accuracy",       value: "2g – 5g" },
-      { label: "Platter Size",   value: "240 × 330 mm" },
-      { label: "Display",        value: "Both sides (Front & Back)" },
-      { label: "Battery Backup", value: "In-built" },
-      { label: "Body Material",  value: "Metal" },
+      { label: "Capacity",         value: "30 kg" },
+      { label: "Accuracy",         value: "2g – 5g" },
+      { label: "Platter Size",     value: "240 × 330 mm" },
+      { label: "Display",          value: "Both sides (Front & Back)" },
+      { label: "Battery Backup",   value: "In-built" },
+      { label: "Body Material",    value: "Metal" },
     ],
     highlights: ["Dual-side display — front and back", "Triple capacity & accuracy", "In-built battery backup", "Robust metal construction"],
   },
@@ -103,12 +68,12 @@ const VARIANTS = [
     gradientFrom: "#1E3A5F",
     gradientTo: "#2d5a8e",
     specs: [
-      { label: "Capacity",       value: "20 kg" },
-      { label: "Accuracy",       value: "100mg – 5g" },
-      { label: "Platter Size",   value: "180 × 230 mm" },
-      { label: "Display",        value: "Rear display" },
-      { label: "RS-232",         value: "Optional" },
-      { label: "Body Material",  value: "Stainless Steel" },
+      { label: "Capacity",         value: "20 kg" },
+      { label: "Accuracy",         value: "100mg – 5g" },
+      { label: "Platter Size",     value: "180 × 230 mm" },
+      { label: "Display",          value: "Rear display" },
+      { label: "RS-232",           value: "Optional" },
+      { label: "Body Material",    value: "Stainless Steel" },
     ],
     highlights: ["Finest accuracy: 100mg division", "Overload protection with buzzer", "RS-232 interface optional", "SS hygiene-grade body"],
   },
@@ -121,12 +86,12 @@ const VARIANTS = [
     gradientFrom: "#92400e",
     gradientTo: "#b45309",
     specs: [
-      { label: "Capacity",       value: "30 kg" },
-      { label: "Accuracy",       value: "2g – 5g" },
-      { label: "Platter Size",   value: "240 × 330 mm" },
-      { label: "Display",        value: "Pole display + Rear display" },
-      { label: "RS-232",         value: "Optional" },
-      { label: "Body Material",  value: "ABS" },
+      { label: "Capacity",         value: "30 kg" },
+      { label: "Accuracy",         value: "2g – 5g" },
+      { label: "Platter Size",     value: "240 × 330 mm" },
+      { label: "Display",          value: "Pole display + Rear display" },
+      { label: "RS-232",           value: "Optional" },
+      { label: "Body Material",    value: "ABS" },
     ],
     highlights: ["Pole display — visible at distance", "Rear display for operator", "RS-232 interface optional", "Lightweight ABS body"],
   },
@@ -139,24 +104,31 @@ const VARIANTS = [
     gradientFrom: "#14532d",
     gradientTo: "#166534",
     specs: [
-      { label: "Capacity",       value: "30 kg" },
-      { label: "Accuracy",       value: "2g – 5g" },
-      { label: "Platter Size",   value: "240 × 330 mm" },
-      { label: "Display",        value: "Pole display option" },
-      { label: "RS-232",         value: "Optional" },
-      { label: "Body Material",  value: "Stainless Steel" },
+      { label: "Capacity",         value: "30 kg" },
+      { label: "Accuracy",         value: "2g – 5g" },
+      { label: "Platter Size",     value: "240 × 330 mm" },
+      { label: "Display",          value: "Pole display option" },
+      { label: "RS-232",           value: "Optional" },
+      { label: "Body Material",    value: "Stainless Steel" },
     ],
     highlights: ["Pole display — visible at distance", "Stainless steel hygiene body", "RS-232 interface optional", "Durable for daily heavy use"],
   },
 ];
 
+const VARIANT_PHOTOS: Record<string, string> = {
+  "metal":       "/images/products/scales/table-top.png",
+  "ss-standard": "/images/products/scales/ss-mini-scale-table-top.png",
+  "abs-pole":    "/images/products/scales/abs-body-display.png",
+  "ss-pole":     "/images/products/scales/ss-mini-scale-table-top.png",
+};
+
 const COMMON_FEATURES = [
-  { icon: Activity,    label: "User Defined Auto Zero",     desc: "Adjustable auto-zero setting for fast, repeatable weighment without manual intervention" },
-  { icon: Zap,         label: "High Precision Load Cell",   desc: "Precision-manufactured load cell ensures consistent accuracy across the full capacity range" },
-  { icon: Cpu,         label: "Advanced Microprocessor",    desc: "Fast response time and stable readings even in environments with minor vibration" },
-  { icon: Monitor,     label: "Bright Red LED Display",     desc: "High-visibility red LED digits readable in all lighting conditions — daylight to dimly lit counters" },
-  { icon: BatteryFull, label: "Standby Mode",               desc: "Automatic standby reduces battery drain during idle periods — extends battery life significantly" },
-  { icon: Shield,      label: "Triple Capacity & Accuracy", desc: "Three switchable capacity/accuracy modes on selected variants — one scale, multiple applications" },
+  { icon: Activity,    label: "User Defined Auto Zero",         desc: "Adjustable auto-zero setting for fast, repeatable weighment without manual intervention" },
+  { icon: Zap,         label: "High Precision Load Cell",       desc: "Precision-manufactured load cell ensures consistent accuracy across the full capacity range" },
+  { icon: Cpu,         label: "Advanced Microprocessor",        desc: "Fast response time and stable readings even in environments with minor vibration" },
+  { icon: Monitor,     label: "Bright Red LED Display",         desc: "High-visibility red LED digits readable in all lighting conditions — daylight to dimly lit counters" },
+  { icon: BatteryFull, label: "Standby Mode",                   desc: "Automatic standby reduces battery drain during idle periods — extends battery life significantly" },
+  { icon: Shield,      label: "Triple Capacity & Accuracy",     desc: "Three switchable capacity/accuracy modes on selected variants — one scale, multiple applications" },
 ];
 
 // ─── 1. Hero ──────────────────────────────────────────────────────────────────
@@ -222,10 +194,10 @@ function Hero() {
 
 function HighlightsRow() {
   const stats = [
-    { icon: Scale,       value: "30 kg",   label: "Max Capacity",    sub: "Across all variants" },
-    { icon: Activity,    value: "2g – 5g", label: "Accuracy",        sub: "100mg on SS Standard" },
-    { icon: BatteryFull, value: "Battery", label: "Backup Built-in", sub: "Standby mode included" },
-    { icon: Monitor,     value: "RS-232",  label: "Interface",       sub: "Optional on 3 variants" },
+    { icon: Scale,      value: "30 kg",      label: "Max Capacity",    sub: "Across all variants" },
+    { icon: Activity,   value: "2g – 5g",    label: "Accuracy",        sub: "100mg on SS Standard" },
+    { icon: BatteryFull, value: "Battery",   label: "Backup Built-in", sub: "Standby mode included" },
+    { icon: Monitor,    value: "RS-232",      label: "Interface",       sub: "Optional on 3 variants" },
   ];
   return (
     <section className="bg-[#1E3A5F]">
@@ -267,33 +239,30 @@ function VariantsGrid() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {VARIANTS.map(({ id, name, sub, badge, badgeClass, specs, highlights }) => {
+          {VARIANTS.map(({ id, name, sub, badge, badgeClass, gradientFrom, gradientTo, specs, highlights }) => {
             const waMsg = encodeURIComponent(`Hello Rite-Way, I am interested in the Table Top Scale — ${sub}. Please advise on pricing and availability.`);
             return (
               <div key={id}
                 className="bg-white border border-gray-100 rounded-sm overflow-hidden flex flex-col hover:shadow-lg transition-all duration-200 group"
                 style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.05)" }}>
 
-                {/* ── Photo area ── */}
-                {id === "metal" ? (
-                  <div className="w-full overflow-hidden" style={{ aspectRatio: "4/3" }}>
-                    <img
-                      src="/images/products/scales/table-top.png"
-                      alt="Metal Body Table Top Scale — Rite-Way"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ) : (
-                  <ImgPlaceholder label={sub} icon={Scale} aspect="4/3" />
-                )}
+                {/* Product photo */}
+                <img
+                  src={VARIANT_PHOTOS[id]}
+                  alt={`Rite-Way Table Top Scale — ${sub}`}
+                  className="w-full object-cover"
+                  style={{ aspectRatio: "4/3" }}
+                />
 
                 <div className="p-6 flex flex-col flex-1">
+                  {/* Badge */}
                   <div className="mb-4">
                     <span className={`inline-block text-[0.58rem] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full border ${badgeClass}`}>
                       {badge}
                     </span>
                   </div>
 
+                  {/* Spec table */}
                   <div className="border border-gray-100 rounded-sm overflow-hidden mb-5">
                     {specs.map(({ label, value }, si) => (
                       <div key={label}
@@ -304,6 +273,7 @@ function VariantsGrid() {
                     ))}
                   </div>
 
+                  {/* Highlights */}
                   <ul className="space-y-1.5 mb-5 flex-1">
                     {highlights.map((h) => (
                       <li key={h} className="flex items-center gap-2 text-xs text-gray-600">
@@ -312,6 +282,7 @@ function VariantsGrid() {
                     ))}
                   </ul>
 
+                  {/* CTA */}
                   <a href={`${WA_BASE}${waMsg}`} target="_blank" rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white text-sm font-semibold px-4 py-3 rounded-sm hover:bg-green-500 transition-colors w-full">
                     <WAIcon /> WhatsApp Get Quote
@@ -331,14 +302,14 @@ function VariantsGrid() {
 const VARIANTS_COMPARE = {
   headers: ["Metal Body", "SS Standard", "ABS + Pole", "SS + Pole"],
   rows: [
-    { label: "Body Material",   values: ["Mild Steel",  "Stainless Steel", "ABS Plastic",  "Stainless Steel"], highlight: false },
-    { label: "Capacity",        values: ["30 kg",       "20 kg",           "30 kg",        "30 kg"],          highlight: false },
-    { label: "Division",        values: ["2g – 5g",     "100mg – 5g",      "2g – 5g",      "2g – 5g"],        highlight: false },
-    { label: "Platter Size",    values: ["240×330 mm",  "180×230 mm",      "240×330 mm",   "240×330 mm"],     highlight: false },
-    { label: "Display",         values: ["Front + Back","Rear",            "Pole + Rear",  "Pole"],           highlight: false },
-    { label: "RS-232",          values: ["No",          "Optional",        "Optional",     "Optional"],       highlight: false },
-    { label: "Overload Buzzer", values: ["No",          "Yes",             "No",           "No"],             highlight: false },
-    { label: "Battery Backup",  values: ["Yes",         "Yes",             "Yes",          "Yes"],            highlight: true  },
+    { label: "Body Material",   values: ["Mild Steel",     "Stainless Steel", "ABS Plastic",    "Stainless Steel"], highlight: false },
+    { label: "Capacity",        values: ["30 kg",          "20 kg",           "30 kg",          "30 kg"],          highlight: false },
+    { label: "Division",        values: ["2g – 5g",        "100mg – 5g",      "2g – 5g",        "2g – 5g"],        highlight: false },
+    { label: "Platter Size",    values: ["240×330 mm",     "180×230 mm",      "240×330 mm",     "240×330 mm"],     highlight: false },
+    { label: "Display",         values: ["Front + Back",   "Rear",            "Pole + Rear",    "Pole"],           highlight: false },
+    { label: "RS-232",          values: ["No",             "Optional",        "Optional",       "Optional"],       highlight: false },
+    { label: "Overload Buzzer", values: ["No",             "Yes",             "No",             "No"],             highlight: false },
+    { label: "Battery Backup",  values: ["Yes",            "Yes",             "Yes",            "Yes"],            highlight: true  },
   ],
 };
 
@@ -360,27 +331,38 @@ function ComparisonTable() {
           <table className="w-full min-w-[640px] border-collapse">
             <thead>
               <tr className="bg-[#1E3A5F]">
-                <th className="text-left px-5 py-4 text-white font-bold text-xs uppercase tracking-[0.12em] w-[22%]">Specification</th>
+                <th className="text-left px-5 py-4 text-white font-bold text-xs uppercase tracking-[0.12em] w-[22%]">
+                  Specification
+                </th>
                 {VARIANTS_COMPARE.headers.map((h) => (
-                  <th key={h} className="text-left px-5 py-4 text-white font-bold text-xs uppercase tracking-[0.12em]">{h}</th>
+                  <th key={h} className="text-left px-5 py-4 text-white font-bold text-xs uppercase tracking-[0.12em]">
+                    {h}
+                  </th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {VARIANTS_COMPARE.rows.map(({ label, values, highlight }, i) => (
-                <tr key={label}
-                  className={`border-b border-gray-100 last:border-b-0 transition-colors hover:bg-blue-50/30 ${i % 2 === 0 ? "bg-white" : "bg-[#F9FAFB]"}`}>
+                <tr
+                  key={label}
+                  className={`border-b border-gray-100 last:border-b-0 transition-colors hover:bg-blue-50/30 ${
+                    i % 2 === 0 ? "bg-white" : "bg-[#F9FAFB]"
+                  }`}>
                   <td className="px-5 py-3.5 align-middle">
                     <span className="text-[#111827] font-semibold text-sm">{label}</span>
                   </td>
                   {values.map((v, vi) => (
                     <td key={vi} className="px-5 py-3.5 align-middle">
                       <span className={`text-sm ${
-                        highlight ? "text-green-600 font-semibold"
-                        : v === "Yes" ? "text-green-600 font-medium"
-                        : v === "No" ? "text-gray-400"
-                        : v === "Optional" ? "text-[#1E3A5F] font-medium"
-                        : "text-gray-600"
+                        highlight
+                          ? "text-green-600 font-semibold"
+                          : v === "Yes"
+                          ? "text-green-600 font-medium"
+                          : v === "No"
+                          ? "text-gray-400"
+                          : v === "Optional"
+                          ? "text-[#1E3A5F] font-medium"
+                          : "text-gray-600"
                       }`}>
                         {highlight && v === "Yes" ? "✓ " : ""}{v}
                       </span>
@@ -400,27 +382,23 @@ function ComparisonTable() {
   );
 }
 
-// ─── 5. Retail Shop Photo ─────────────────────────────────────────────────────
+// ─── 5. Common Features ───────────────────────────────────────────────────────
 
 function RetailShopPhoto() {
   return (
     <section className="bg-white py-10 border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        {/* ── CHANGED: table-top.png ── */}
-        <div className="w-full overflow-hidden rounded-sm" style={{ aspectRatio: "21/9" }}>
-          <img
-            src="/images/products/scales/table-top.png"
-            alt="Table Top Scale — Rite-Way retail application"
-            className="w-full h-full object-cover"
-          />
-        </div>
+        <img
+          src="/images/products/scales/table-top.png"
+          alt="Rite-Way Table Top Scale in retail shop — counter application"
+          className="w-full rounded-sm object-cover"
+          style={{ aspectRatio: "21/9" }}
+        />
         <p className="text-xs text-gray-400 mt-2 text-center">Table Top Scale — retail and kirana shop application</p>
       </div>
     </section>
   );
 }
-
-// ─── 6. Common Features ───────────────────────────────────────────────────────
 
 function CommonFeatures() {
   return (
@@ -455,15 +433,15 @@ function CommonFeatures() {
   );
 }
 
-// ─── 7. Perfect For ───────────────────────────────────────────────────────────
+// ─── 5. Perfect For ───────────────────────────────────────────────────────────
 
 function PerfectFor() {
   const useCases = [
-    { icon: ShoppingCart, title: "Retail Shops",            desc: "Accurate, fast, and easy to operate on a busy shop counter — battery backup ensures no downtime." },
-    { icon: Package,      title: "Kirana & General Stores", desc: "Dual-side displays let your customer see the weight directly — builds trust in every sale." },
-    { icon: Stethoscope,  title: "Medical Clinics",         desc: "Clean stainless steel body variants maintain hygiene standards required in clinical environments." },
-    { icon: Warehouse,    title: "Small Factories",         desc: "RS-232 interface connects to your computer system for automated weight data recording." },
-    { icon: Package,      title: "Courier & Logistics",     desc: "Accurate parcel weighing at counters — pole display visible to both operator and customer." },
+    { icon: ShoppingCart,  title: "Retail Shops",               desc: "Accurate, fast, and easy to operate on a busy shop counter — battery backup ensures no downtime." },
+    { icon: Package,       title: "Kirana & General Stores",    desc: "Dual-side displays let your customer see the weight directly — builds trust in every sale." },
+    { icon: Stethoscope,   title: "Medical Clinics",            desc: "Clean stainless steel body variants maintain hygiene standards required in clinical environments." },
+    { icon: Warehouse,     title: "Small Factories",            desc: "RS-232 interface connects to your computer system for automated weight data recording." },
+    { icon: Package,       title: "Courier & Logistics",        desc: "Accurate parcel weighing at counters — pole display visible to both operator and customer." },
   ];
 
   return (
@@ -497,7 +475,7 @@ function PerfectFor() {
   );
 }
 
-// ─── 8. Related Scales ────────────────────────────────────────────────────────
+// ─── 6. Related Scales ────────────────────────────────────────────────────────
 
 function RelatedScales() {
   const related = [
@@ -555,7 +533,7 @@ function RelatedScales() {
   );
 }
 
-// ─── 9. CTA Banner ────────────────────────────────────────────────────────────
+// ─── 7. CTA Banner ───────────────────────────────────────────────────────────
 
 function CTABanner() {
   return (
